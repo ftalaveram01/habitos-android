@@ -1,4 +1,4 @@
-package com.ftalaveram.habbbits.model;
+package com.ftalaveram.habbbits.repository.models;
 
 import java.util.Date;
 
