@@ -1,11 +1,15 @@
 package com.ftalaveram.habbbits.presentation.activities;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import com.ftalaveram.habbbits.R;
 import com.ftalaveram.habbbits.databinding.ActivityMainBinding;
 import com.ftalaveram.habbbits.session.SessionManager;
 
