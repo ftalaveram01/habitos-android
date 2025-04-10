@@ -3,6 +3,11 @@ plugins {
 }
 
 android {
+
+    buildFeatures{
+        viewBinding = true
+    }
+
     namespace = "com.ftalaveram.habbbits"
     compileSdk = 35
 

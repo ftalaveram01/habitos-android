@@ -7,6 +7,13 @@ public class UserHabit extends Habit{
     private Date fechaNuevaActualizacion;
     private boolean publico;
 
+    public UserHabit(String nombre, String descripcion, Long id, Date fechaNuevaActualizacion, boolean publico) {
+        super(nombre, descripcion);
+        this.id = id;
+        this.fechaNuevaActualizacion = fechaNuevaActualizacion;
+        this.publico = publico;
+    }
+
     public Long getId() {
         return id;
     }

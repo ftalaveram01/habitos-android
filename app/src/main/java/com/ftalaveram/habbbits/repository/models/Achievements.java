@@ -10,6 +10,15 @@ public class Achievements {
     private int puntuacion;
     private String nombre;
 
+    public Achievements(int id, int idHabito, Date fechaRegistro, boolean puntual, int puntuacion, String nombre) {
+        this.id = id;
+        this.idHabito = idHabito;
+        this.fechaRegistro = fechaRegistro;
+        this.puntual = puntual;
+        this.puntuacion = puntuacion;
+        this.nombre = nombre;
+    }
+
     public int getId() {
         return id;
     }
