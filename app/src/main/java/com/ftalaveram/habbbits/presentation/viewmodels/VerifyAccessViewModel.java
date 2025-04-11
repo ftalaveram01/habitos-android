@@ -43,7 +43,6 @@ public class VerifyAccessViewModel extends AndroidViewModel {
                 }else{
                     verifyAccess.postValue(new VerifyAccess(false));
                 }
-                Log.d("TOKEN", sessionManager.getToken());
             }
 
             @Override
