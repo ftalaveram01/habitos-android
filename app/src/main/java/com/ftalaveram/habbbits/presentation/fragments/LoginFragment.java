@@ -1,14 +1,34 @@
 package com.ftalaveram.habbbits.presentation.fragments;
 
+import android.app.Application;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.transition.Visibility;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.ftalaveram.habbbits.R;
+import com.ftalaveram.habbbits.databinding.FragmentLoginBinding;
+import com.ftalaveram.habbbits.presentation.activities.HomeActivity;
+import com.ftalaveram.habbbits.presentation.viewmodels.LoginViewModel;
+import com.ftalaveram.habbbits.repositories.api.ApiClient;
+import com.ftalaveram.habbbits.repositories.api.ApiService;
+import com.ftalaveram.habbbits.repositories.api.RemoteDataSource;
+import com.ftalaveram.habbbits.repositories.models.LoginData;
+import com.ftalaveram.habbbits.repositories.models.LoginRequest;
+import com.ftalaveram.habbbits.repositories.repository.UserRepository;
+import com.ftalaveram.habbbits.session.SessionManager;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,33 +37,17 @@ import com.ftalaveram.habbbits.R;
  */
 public class LoginFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public LoginFragment() {
-        // Required empty public constructor
-    }
+    FragmentLoginBinding binding;
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment LoginFragment.
      */
     // TODO: Rename and change types and number of parameters
     public static LoginFragment newInstance(String param1, String param2) {
         LoginFragment fragment = new LoginFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,16 +55,39 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false);
+        binding = FragmentLoginBinding.inflate(inflater, container, false);
+        LoginViewModel loginViewModel = new ViewModelProvider(requireActivity()).get(LoginViewModel.class);
+
+        binding.btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginViewModel.login(binding.usernameInput.getText().toString(), binding.passwordInput.getText().toString());
+            }
+        });
+
+        loginViewModel.loginData.observe(getViewLifecycleOwner(), new Observer<LoginData>() {
+            @Override
+            public void onChanged(LoginData loginData) {
+                if (loginData.isSuccess()){
+                    startActivity(new Intent(requireActivity(), HomeActivity.class));
+                    requireActivity().finish();
+                }else{
+                    Log.d("ERROR DE CREDENCIALES", "El usuario o contraseña no son correctos");
+                }
+            }
+        });
+
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

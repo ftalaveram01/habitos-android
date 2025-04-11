@@ -1,4 +1,4 @@
-package com.ftalaveram.habbbits.repository.models;
+package com.ftalaveram.habbbits.repositories.models;
 
 public class Habit {
 

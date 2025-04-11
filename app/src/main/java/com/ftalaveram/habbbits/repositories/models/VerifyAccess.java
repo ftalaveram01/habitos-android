@@ -1,4 +1,4 @@
-package com.ftalaveram.habbbits.repository.models;
+package com.ftalaveram.habbbits.repositories.models;
 
 public class VerifyAccess {
 
@@ -9,7 +9,12 @@ public class VerifyAccess {
     }
 
     public boolean isAuthenticated() {
-        return isAuthenticated;
+        try {
+            return isAuthenticated;
+        } catch (NullPointerException e){
+            return  false;
+        }
+
     }
 
     public void setAuthenticated(boolean authenticated) {

@@ -46,10 +46,6 @@ public class SessionManager {
         return sharedPreferences.getString(KEY_TOKEN, null);
     }
 
-    public boolean isLoggedIn() {
-        return getToken() != null;
-    }
-
     public void logout() {
         sharedPreferences.edit()
                 .remove(KEY_TOKEN)

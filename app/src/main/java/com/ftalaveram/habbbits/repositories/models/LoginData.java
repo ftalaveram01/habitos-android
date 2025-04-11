@@ -1,4 +1,4 @@
-package com.ftalaveram.habbbits.repository.models;
+package com.ftalaveram.habbbits.repositories.models;
 
 public class LoginData {
 
@@ -60,5 +60,14 @@ public class LoginData {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    @Override
+    public String toString() {
+        return "LoginData{" +
+                "success=" + success +
+                ", userData=" + userData +
+                ", token='" + token + '\'' +
+                '}';
     }
 }
