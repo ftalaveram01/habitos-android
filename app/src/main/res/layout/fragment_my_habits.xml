@@ -3,12 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/backgroundGeneral"
     tools:context=".presentation.fragments.MyHabitsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_pokemons_equipo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="MY HABBBITS" />
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        />
+
+    <TextView
+        android:id="@+id/texto_vacio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NO HABBBITS YET"
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:visibility="gone"
+        />
 
 </FrameLayout>

@@ -5,7 +5,8 @@
     android:layout_gravity="center_horizontal"
     android:gravity="center"
     android:background="@color/backgroundGeneral"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:fitsSystemWindows="true">
 
     <TextView
         android:id="@+id/textView"
