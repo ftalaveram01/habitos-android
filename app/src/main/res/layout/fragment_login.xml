@@ -7,7 +7,7 @@
     android:layout_gravity="center"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@color/backgroudGeneral"
+    android:background="@color/backgroundGeneral"
     tools:context=".presentation.fragments.LoginFragment">
 
     <TextView

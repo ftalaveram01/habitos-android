@@ -9,6 +9,8 @@ import retrofit2.http.POST;
 import com.ftalaveram.habbbits.repositories.models.Habit;
 import com.ftalaveram.habbbits.repositories.models.LoginData;
 import com.ftalaveram.habbbits.repositories.models.LoginRequest;
+import com.ftalaveram.habbbits.repositories.models.RegisterRequest;
+import com.ftalaveram.habbbits.repositories.models.RegisterResponse;
 import com.ftalaveram.habbbits.repositories.models.VerifyAccess;
 
 import java.util.List;
@@ -20,6 +22,9 @@ public interface ApiService {
 
     @POST("/usuarios/login")
     Call<LoginData> login(@Body LoginRequest request);
+
+    @POST("/usuarios/register")
+    Call<RegisterResponse> register(@Body RegisterRequest request);
 
     @GET("/usuarios/verifyaccess")
     Call<VerifyAccess> verifyAccess(@Header("Authorization") String token);

@@ -2,6 +2,8 @@ package com.ftalaveram.habbbits.repositories.api;
 
 import com.ftalaveram.habbbits.repositories.models.LoginData;
 import com.ftalaveram.habbbits.repositories.models.LoginRequest;
+import com.ftalaveram.habbbits.repositories.models.RegisterRequest;
+import com.ftalaveram.habbbits.repositories.models.RegisterResponse;
 import com.ftalaveram.habbbits.repositories.models.VerifyAccess;
 
 import retrofit2.Call;
@@ -17,6 +19,11 @@ public class RemoteDataSource {
 
     public void login(LoginRequest request, final Callback<LoginData> callback) {
         Call<LoginData> call = apiService.login(request);
+        call.enqueue(callback);
+    }
+
+    public void register(RegisterRequest request, final Callback<RegisterResponse> callback){
+        Call<RegisterResponse> call = apiService.register(request);
         call.enqueue(callback);
     }
 
