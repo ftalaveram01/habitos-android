@@ -51,14 +51,12 @@ public class MyHabitsViewModel extends AndroidViewModel {
                     habitsLiveData.postValue(response.body());
                 }
                 else{
-                    Log.d("DEBUG", "Ha saltado el else");
                     habitsLiveData.postValue(new ArrayList<>());
                 }
             }
 
             @Override
             public void onFailure(Call<List<UserHabit>> call, Throwable t) {
-                Log.d("DEBUG", "Ha saltado on failure: " + t.toString());
                 habitsLiveData.postValue(new ArrayList<>());
             }
         });
