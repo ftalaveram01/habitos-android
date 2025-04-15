@@ -19,6 +19,7 @@ import com.ftalaveram.habbbits.R;
 import com.ftalaveram.habbbits.databinding.FragmentAchievementsBinding;
 import com.ftalaveram.habbbits.presentation.adapters.AchievementsRecycledViewAdapter;
 import com.ftalaveram.habbbits.presentation.viewmodels.AchievementsViewModel;
+import com.ftalaveram.habbbits.repositories.models.Achievements;
 
 
 public class AchievementsFragment extends Fragment {
@@ -45,6 +46,8 @@ public class AchievementsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        int puntuacion = 0;
+
         recycledViewAdapter = new AchievementsRecycledViewAdapter();
         GridLayoutManager grid = new GridLayoutManager(getContext(), 1);
         binding.recyclerViewAchievements.setLayoutManager(grid);
@@ -54,6 +57,8 @@ public class AchievementsFragment extends Fragment {
         achievementsViewModel.getAchievements().observe(getViewLifecycleOwner(), achievements -> {
             recycledViewAdapter.setAchievements(achievements);
             recycledViewAdapter.notifyDataSetChanged();
+
+            binding.puntuacionTotal.setText(binding.puntuacionTotal.getText() + String.valueOf(achievementsViewModel.getTotalPoints()));
 
             if(recycledViewAdapter.getItemCount() > 0){
                 binding.textoVacioAchievements.setVisibility(GONE);

@@ -59,4 +59,17 @@ public class AchievementsViewModel extends AndroidViewModel {
             }
         });
     }
+
+    public int getTotalPoints(){
+
+        int puntuacion = 0;
+
+        if (achievementsLiveData.getValue() != null){
+            for ( Achievements achievement : achievementsLiveData.getValue()){
+                puntuacion += achievement.getPuntuacion();
+            }
+        }
+
+        return puntuacion;
+    }
 }
