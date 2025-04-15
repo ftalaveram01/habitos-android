@@ -3,13 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/backgroundGeneral"
     tools:context=".presentation.fragments.RecommendedFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_recommended_habits"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        />
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/texto_vacio_recommended_habits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NO RECOMMENDED HABBBITS YET"
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:visibility="gone"
+        />
 
 </FrameLayout>

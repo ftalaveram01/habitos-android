@@ -20,7 +20,6 @@ import com.ftalaveram.habbbits.presentation.viewmodels.MyHabitsViewModel;
 public class MyHabitsFragment extends Fragment {
 
     private FragmentMyHabitsBinding binding;
-    private NavController navController;
     private MyHabbbitsRecycledViewAdapter recycledViewAdapter;
     private MyHabitsViewModel myHabitsViewModel;
 
@@ -41,13 +40,11 @@ public class MyHabitsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        navController = Navigation.findNavController(view);
-
         // Configurar RecyclerView
         recycledViewAdapter = new MyHabbbitsRecycledViewAdapter();
         GridLayoutManager grid = new GridLayoutManager(getContext(), 1);
-        binding.recyclerViewPokemonsEquipo.setLayoutManager(grid);
-        binding.recyclerViewPokemonsEquipo.setAdapter(recycledViewAdapter);
+        binding.recyclerViewMyHabbbits.setLayoutManager(grid);
+        binding.recyclerViewMyHabbbits.setAdapter(recycledViewAdapter);
 
         // Observar cambios en los datos
         myHabitsViewModel.getHabits().observe(getViewLifecycleOwner(), habits -> {
