@@ -6,11 +6,11 @@ public class Achievements {
     private int id;
     private int idHabito;
     private Date fechaRegistro;
-    private boolean puntual;
+    private int puntual;
     private int puntuacion;
     private String nombre;
 
-    public Achievements(int id, int idHabito, Date fechaRegistro, boolean puntual, int puntuacion, String nombre) {
+    public Achievements(int id, int idHabito, Date fechaRegistro, int puntual, int puntuacion, String nombre) {
         this.id = id;
         this.idHabito = idHabito;
         this.fechaRegistro = fechaRegistro;
@@ -44,10 +44,10 @@ public class Achievements {
     }
 
     public boolean isPuntual() {
-        return puntual;
+        return puntual == 1;
     }
 
-    public void setPuntual(boolean puntual) {
+    public void setPuntual(int puntual) {
         this.puntual = puntual;
     }
 

@@ -1,5 +1,6 @@
 package com.ftalaveram.habbbits.repositories.api;
 
+import com.ftalaveram.habbbits.repositories.models.Achievements;
 import com.ftalaveram.habbbits.repositories.models.Habit;
 import com.ftalaveram.habbbits.repositories.models.LoginData;
 import com.ftalaveram.habbbits.repositories.models.LoginRequest;
@@ -51,6 +52,15 @@ public class RemoteDataSource {
 
     public void getRecommendedHabits(final Callback<List<Habit>> callback){
         Call<List<Habit>> call = apiService.getHabitosRecomendados();
+        call.enqueue(callback);
+    }
+
+    //-------------------------------------------------------------------------------------------------
+    //-----------------------------------ACHIEVEMENTS METHODS-------------------------------------------------
+    //-------------------------------------------------------------------------------------------------
+
+    public void getAchievements(String token, final Callback<List<Achievements>> callback){
+        Call<List<Achievements>> call = apiService.getAchievements(token);
         call.enqueue(callback);
     }
 

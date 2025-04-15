@@ -6,6 +6,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 
+import com.ftalaveram.habbbits.repositories.models.Achievements;
 import com.ftalaveram.habbbits.repositories.models.Habit;
 import com.ftalaveram.habbbits.repositories.models.LoginData;
 import com.ftalaveram.habbbits.repositories.models.LoginRequest;
@@ -32,4 +33,7 @@ public interface ApiService {
 
     @GET("/habitos/recomendados")
     Call<List<Habit>> getHabitosRecomendados();
+
+    @GET("/historial")
+    Call<List<Achievements>> getAchievements(@Header("Authorization") String token);
 }
