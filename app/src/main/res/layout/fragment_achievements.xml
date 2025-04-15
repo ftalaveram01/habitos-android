@@ -13,8 +13,20 @@
         android:id="@+id/my_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="20dp"
         android:layout_gravity="center"
-        android:gravity="center"/>
+        android:gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/puntuacion_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="20dp"
+        android:text="Total points: "
+        android:layout_gravity="center"
+        android:textSize="20sp"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_achievements"
