@@ -5,9 +5,9 @@ import java.util.Date;
 public class UserHabit extends Habit{
     private Long id;
     private Date fechaNuevaActualizacion;
-    private boolean publico;
+    private int publico;
 
-    public UserHabit(String nombre, String descripcion, Long id, Date fechaNuevaActualizacion, boolean publico) {
+    public UserHabit(String nombre, String descripcion, Long id, Date fechaNuevaActualizacion, int publico) {
         super(nombre, descripcion);
         this.id = id;
         this.fechaNuevaActualizacion = fechaNuevaActualizacion;
@@ -31,10 +31,10 @@ public class UserHabit extends Habit{
     }
 
     public boolean isPublico() {
-        return publico;
+        return publico == 1;
     }
 
-    public void setPublico(boolean publico) {
+    public void setPublico(int publico) {
         this.publico = publico;
     }
 }

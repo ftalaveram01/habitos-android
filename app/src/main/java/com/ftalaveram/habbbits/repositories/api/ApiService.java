@@ -11,14 +11,12 @@ import com.ftalaveram.habbbits.repositories.models.LoginData;
 import com.ftalaveram.habbbits.repositories.models.LoginRequest;
 import com.ftalaveram.habbbits.repositories.models.RegisterRequest;
 import com.ftalaveram.habbbits.repositories.models.RegisterResponse;
+import com.ftalaveram.habbbits.repositories.models.UserHabit;
 import com.ftalaveram.habbbits.repositories.models.VerifyAccess;
 
 import java.util.List;
 
 public interface ApiService {
-
-    @GET("/habitos/recomendados")
-    Call<List<Habit>> getHabitosRecomendados();
 
     @POST("/usuarios/login")
     Call<LoginData> login(@Body LoginRequest request);
@@ -28,4 +26,10 @@ public interface ApiService {
 
     @GET("/usuarios/verifyaccess")
     Call<VerifyAccess> verifyAccess(@Header("Authorization") String token);
+
+    @GET("habitos/usuario")
+    Call<List<UserHabit>> getUserHabits(@Header("Authorization") String token);
+
+    @GET("/habitos/recomendados")
+    Call<List<Habit>> getHabitosRecomendados();
 }
