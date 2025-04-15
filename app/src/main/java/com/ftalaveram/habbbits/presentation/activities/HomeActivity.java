@@ -1,5 +1,7 @@
 package com.ftalaveram.habbbits.presentation.activities;
 
+import android.annotation.SuppressLint;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -19,11 +21,13 @@ public class HomeActivity extends AppCompatActivity {
 
     ActivityHomeBinding binding;
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView((binding = ActivityHomeBinding.inflate(getLayoutInflater())).getRoot());
         setContentView(binding.getRoot());
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         setSupportActionBar(binding.toolbar);
 

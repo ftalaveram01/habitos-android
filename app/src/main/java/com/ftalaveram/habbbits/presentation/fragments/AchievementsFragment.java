@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 
 import com.ftalaveram.habbbits.R;
 import com.ftalaveram.habbbits.databinding.FragmentAchievementsBinding;
@@ -21,12 +23,18 @@ import com.ftalaveram.habbbits.presentation.adapters.AchievementsRecycledViewAda
 import com.ftalaveram.habbbits.presentation.viewmodels.AchievementsViewModel;
 import com.ftalaveram.habbbits.repositories.models.Achievements;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class AchievementsFragment extends Fragment {
 
     private FragmentAchievementsBinding binding;
     private AchievementsRecycledViewAdapter recycledViewAdapter;
     private AchievementsViewModel achievementsViewModel;
+
+    private ArrayAdapter<String> spinnerAdapter;
+    private List<String> uniqueNames = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,7 +65,7 @@ public class AchievementsFragment extends Fragment {
         achievementsViewModel.getAchievements().observe(getViewLifecycleOwner(), achievements -> {
             recycledViewAdapter.setAchievements(achievements);
             recycledViewAdapter.notifyDataSetChanged();
-
+            setupSpinner();
             binding.puntuacionTotal.setText(binding.puntuacionTotal.getText() + String.valueOf(achievementsViewModel.getTotalPoints()));
 
             if(recycledViewAdapter.getItemCount() > 0){
@@ -72,5 +80,51 @@ public class AchievementsFragment extends Fragment {
         }else{
             binding.textoVacioAchievements.setVisibility(VISIBLE);
         }
+    }
+
+    private void setupSpinner(){
+        uniqueNames.add("*");
+
+        for (Achievements a : achievementsViewModel.getAchievements().getValue()){
+            if (!uniqueNames.contains(a.getNombre())){
+                uniqueNames.add(a.getNombre());
+            }
+        }
+
+        spinnerAdapter = new ArrayAdapter<>(
+                requireContext(),
+                android.R.layout.simple_spinner_item,
+                uniqueNames
+        );
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.mySpinner.setAdapter(spinnerAdapter);
+
+        binding.mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                applyFilter(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+    }
+
+    private void applyFilter(int position) {
+        List<Achievements> filteredList = new ArrayList<>();
+
+        if (position == 0) {
+            filteredList.addAll(achievementsViewModel.getAchievements().getValue());
+        } else {
+            String selectedName = uniqueNames.get(position);
+            for (Achievements item : achievementsViewModel.getAchievements().getValue()) {
+                if (item.getNombre().equals(selectedName)) {
+                    filteredList.add(item);
+                }
+            }
+        }
+
+        recycledViewAdapter.setAchievements(filteredList);
+        recycledViewAdapter.notifyDataSetChanged();
     }
 }

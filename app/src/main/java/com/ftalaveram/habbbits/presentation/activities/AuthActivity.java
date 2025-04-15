@@ -1,5 +1,7 @@
 package com.ftalaveram.habbbits.presentation.activities;
 
+import android.annotation.SuppressLint;
+import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.WindowManager;
@@ -23,14 +25,17 @@ public class AuthActivity extends AppCompatActivity {
     private NavController navController;
     ActivityAuthBinding binding;
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView((binding = ActivityAuthBinding.inflate(getLayoutInflater())).getRoot());
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment);
 
+        assert navHostFragment != null;
         navController = navHostFragment.getNavController();
 
     }
