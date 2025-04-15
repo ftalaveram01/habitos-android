@@ -53,6 +53,7 @@ public class AchievementsRecycledViewAdapter extends RecyclerView.Adapter<Achiev
         holder.getBinding().name.setText(achievement.getNombre());
         holder.getBinding().date.setText(fechaFormateada);
         holder.getBinding().points.setText(String.valueOf(achievement.getPuntuacion()));
+        holder.getBinding().puntual.setBackgroundResource(R.drawable.textview_puntual);
         if (!achievement.isPuntual()){
             holder.getBinding().puntual.setBackgroundResource(R.drawable.textview_impuntual);
         }
@@ -68,4 +69,5 @@ public class AchievementsRecycledViewAdapter extends RecyclerView.Adapter<Achiev
         this.achievements = achievements;
         notifyDataSetChanged();
     }
+
 }

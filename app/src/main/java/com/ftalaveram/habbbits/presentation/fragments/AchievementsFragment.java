@@ -102,29 +102,12 @@ public class AchievementsFragment extends Fragment {
         binding.mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                applyFilter(position);
+                recycledViewAdapter.setAchievements(achievementsViewModel.filterBy(uniqueNames.get(position)));
+                recycledViewAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
-    }
-
-    private void applyFilter(int position) {
-        List<Achievements> filteredList = new ArrayList<>();
-
-        if (position == 0) {
-            filteredList.addAll(achievementsViewModel.getAchievements().getValue());
-        } else {
-            String selectedName = uniqueNames.get(position);
-            for (Achievements item : achievementsViewModel.getAchievements().getValue()) {
-                if (item.getNombre().equals(selectedName)) {
-                    filteredList.add(item);
-                }
-            }
-        }
-
-        recycledViewAdapter.setAchievements(filteredList);
-        recycledViewAdapter.notifyDataSetChanged();
     }
 }

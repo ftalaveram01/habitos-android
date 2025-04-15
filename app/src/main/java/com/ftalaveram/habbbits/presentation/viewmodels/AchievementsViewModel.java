@@ -30,6 +30,7 @@ public class AchievementsViewModel extends AndroidViewModel {
     AchievementsRepository repository = new AchievementsRepository(remoteDataSource);
     private SessionManager sessionManager;
 
+    private List<Achievements> completeAchievements = new ArrayList<>();
     private final MutableLiveData<List<Achievements>> achievementsLiveData = new MutableLiveData<>();
 
     public AchievementsViewModel(@NonNull Application application){
@@ -47,6 +48,7 @@ public class AchievementsViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<List<Achievements>> call, Response<List<Achievements>> response) {
                 if (response.body() != null && response.isSuccessful()){
+                    completeAchievements = response.body();
                     achievementsLiveData.postValue(response.body());
                 }
                 else{
@@ -72,5 +74,18 @@ public class AchievementsViewModel extends AndroidViewModel {
         }
 
         return puntuacion;
+    }
+
+    public List<Achievements> filterBy(String nombre){
+
+        if (nombre.equals("*")){
+            return completeAchievements;
+        }
+
+        List<Achievements> filteredList = achievementsLiveData.getValue().stream()
+                .filter(a -> a.getNombre().equals(nombre))
+                .collect(Collectors.toList());
+
+        return filteredList;
     }
 }
