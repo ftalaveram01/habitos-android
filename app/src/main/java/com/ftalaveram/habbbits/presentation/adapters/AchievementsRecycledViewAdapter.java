@@ -40,4 +40,9 @@ public class AchievementsRecycledViewAdapter extends RecyclerView.Adapter<Achiev
     public int getItemCount() {
         return achievements != null ? achievements.size() : 0;
     }
+
+    public void setAchievements(List<Achievements> achievements){
+        this.achievements = achievements;
+        notifyDataSetChanged();
+    }
 }
