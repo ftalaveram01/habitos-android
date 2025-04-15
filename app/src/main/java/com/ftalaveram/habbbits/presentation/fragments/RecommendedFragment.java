@@ -1,5 +1,8 @@
 package com.ftalaveram.habbbits.presentation.fragments;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -55,6 +58,17 @@ public class RecommendedFragment extends Fragment {
         recommendedHabitsViewModel.getHabits().observe(getViewLifecycleOwner(), habits -> {
             recycledViewAdapter.setMyHabbbits(habits);
             recycledViewAdapter.notifyDataSetChanged();
+            if(recycledViewAdapter.getItemCount() > 0){
+                binding.textoVacioRecommendedHabits.setVisibility(GONE);
+            }else{
+                binding.textoVacioRecommendedHabits.setVisibility(VISIBLE);
+            }
         });
+
+        if(recycledViewAdapter.getItemCount() > 0){
+            binding.textoVacioRecommendedHabits.setVisibility(GONE);
+        }else{
+            binding.textoVacioRecommendedHabits.setVisibility(VISIBLE);
+        }
     }
 }
