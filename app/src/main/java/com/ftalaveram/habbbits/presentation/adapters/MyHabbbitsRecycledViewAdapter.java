@@ -1,5 +1,6 @@
 package com.ftalaveram.habbbits.presentation.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -33,6 +34,7 @@ public class MyHabbbitsRecycledViewAdapter extends RecyclerView.Adapter<MyHabbbi
         UserHabit userHabit = myHabbbits.get(position);
         holder.getBinding().title.setText(userHabit.getNombre());
         holder.getBinding().description.setText(userHabit.getDescripcion());
+        //Log.d("DEBUG DE HABBBITS", userHabit.getFechaNuevaActualizacion().toString());
     }
 
     @Override
