@@ -3,12 +3,9 @@ package com.ftalaveram.habbbits.presentation.activities;
 import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -16,6 +13,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.ftalaveram.habbbits.R;
 import com.ftalaveram.habbbits.databinding.ActivityHomeBinding;
+
+import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -41,8 +40,23 @@ public class HomeActivity extends AppCompatActivity {
         ).build();
 
         NavigationUI.setupWithNavController(binding.bottomNavView, navController);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
-        NavigationUI.setupWithNavController(binding.toolbar, navController, appBarConfiguration);
+        TextView toolbarTitle = binding.toolbar.findViewById(R.id.toolbar_title);
 
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            int id = destination.getId();
+            if (id == R.id.myHabitsFragment) {
+                toolbarTitle.setText(R.string.my_habbbits);
+            } else if (id == R.id.recommendedFragment) {
+                toolbarTitle.setText(R.string.recommended);
+            } else if (id == R.id.achievementsFragment) {
+                toolbarTitle.setText(R.string.achievements);
+            } else if (id == R.id.profileFragment) {
+                toolbarTitle.setText(R.string.profile);
+            } else {
+                toolbarTitle.setText("Habbbits");
+            }
+        });
     }
 }
