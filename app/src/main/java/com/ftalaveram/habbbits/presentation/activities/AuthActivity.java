@@ -15,19 +15,18 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.ftalaveram.habbbits.R;
+import com.ftalaveram.habbbits.databinding.ActivityAuthBinding;
+import com.ftalaveram.habbbits.databinding.ActivityMainBinding;
 
 public class AuthActivity extends AppCompatActivity {
 
     private NavController navController;
+    ActivityAuthBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_auth);
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) { // Pre-Android 10
-            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO); // Fuerza modo claro
-        }
+        setContentView((binding = ActivityAuthBinding.inflate(getLayoutInflater())).getRoot());
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment);
