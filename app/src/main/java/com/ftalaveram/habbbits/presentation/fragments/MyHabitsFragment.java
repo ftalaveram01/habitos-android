@@ -53,6 +53,7 @@ public class MyHabitsFragment extends Fragment {
         myHabitsViewModel.getHabits().observe(getViewLifecycleOwner(), habits -> {
             recycledViewAdapter.setMyHabbbits(habits);
             recycledViewAdapter.notifyDataSetChanged();
+
             if(recycledViewAdapter.getItemCount() > 0){
                 binding.textoVacioMyHabbbits.setVisibility(GONE);
             }else{
