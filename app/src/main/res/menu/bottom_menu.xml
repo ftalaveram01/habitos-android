@@ -3,23 +3,23 @@
 
     <item
         android:id="@+id/myHabitsFragment"
-        android:icon="@android:drawable/ic_dialog_alert"
+        android:icon="@drawable/home"
         android:title="@string/my_habbbits"
         />
     <item
         android:id="@+id/recommendedFragment"
-        android:icon="@android:drawable/ic_dialog_alert"
+        android:icon="@drawable/recommended"
         android:title="@string/recommended"
         />
     <item
         android:id="@+id/achievementsFragment"
-        android:icon="@android:drawable/ic_dialog_alert"
+        android:icon="@drawable/achievements"
         android:title="@string/achievements"
         />
 
     <item
         android:id="@+id/profileFragment"
-        android:icon="@android:drawable/ic_dialog_alert"
+        android:icon="@drawable/profile"
         android:title="@string/profile"
         />
 </menu>
