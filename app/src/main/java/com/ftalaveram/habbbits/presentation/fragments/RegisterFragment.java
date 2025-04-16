@@ -2,6 +2,8 @@ package com.ftalaveram.habbbits.presentation.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -20,31 +22,31 @@ import com.ftalaveram.habbbits.repositories.models.RegisterResponse;
 
 public class RegisterFragment extends Fragment {
 
-    FragmentRegisterBinding binding;
-
-    public static RegisterFragment newInstance(String param1, String param2) {
-        RegisterFragment fragment = new RegisterFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private FragmentRegisterBinding binding;
+    private RegisterViewModel registerViewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        registerViewModel = new ViewModelProvider(requireActivity()).get(RegisterViewModel.class);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentRegisterBinding.inflate(inflater, container, false);
-        RegisterViewModel registerViewModel = new ViewModelProvider(requireActivity()).get(RegisterViewModel.class);
+
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         binding.btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (inputsValidators()){
-                    Log.d("DEBUG", "Ha pasado las validacines y va a ir al viewmodel a register");
                     registerViewModel.register(binding.nameInput.getText().toString(), binding.emailInput.getText().toString(), binding.passwordInput.getText().toString());
                 }
             }
@@ -58,9 +60,6 @@ public class RegisterFragment extends Fragment {
                 }
             }
         });
-
-
-        return binding.getRoot();
     }
 
     private boolean inputsValidators() {

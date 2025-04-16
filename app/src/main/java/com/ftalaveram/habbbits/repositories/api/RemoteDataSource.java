@@ -4,6 +4,7 @@ import com.ftalaveram.habbbits.repositories.models.Achievements;
 import com.ftalaveram.habbbits.repositories.models.Habit;
 import com.ftalaveram.habbbits.repositories.models.LoginData;
 import com.ftalaveram.habbbits.repositories.models.LoginRequest;
+import com.ftalaveram.habbbits.repositories.models.ProfileResponse;
 import com.ftalaveram.habbbits.repositories.models.RegisterRequest;
 import com.ftalaveram.habbbits.repositories.models.RegisterResponse;
 import com.ftalaveram.habbbits.repositories.models.UserHabit;
@@ -38,6 +39,11 @@ public class RemoteDataSource {
 
     public void verifyAccess(String token, final Callback<VerifyAccess> callback){
         Call<VerifyAccess> call = apiService.verifyAccess(token);
+        call.enqueue(callback);
+    }
+
+    public void getProfileData(String token, final Callback<ProfileResponse> callback){
+        Call<ProfileResponse> call = apiService.getProfileData(token);
         call.enqueue(callback);
     }
 

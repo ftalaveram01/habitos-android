@@ -10,6 +10,7 @@ import com.ftalaveram.habbbits.repositories.models.Achievements;
 import com.ftalaveram.habbbits.repositories.models.Habit;
 import com.ftalaveram.habbbits.repositories.models.LoginData;
 import com.ftalaveram.habbbits.repositories.models.LoginRequest;
+import com.ftalaveram.habbbits.repositories.models.ProfileResponse;
 import com.ftalaveram.habbbits.repositories.models.RegisterRequest;
 import com.ftalaveram.habbbits.repositories.models.RegisterResponse;
 import com.ftalaveram.habbbits.repositories.models.UserHabit;
@@ -27,6 +28,9 @@ public interface ApiService {
 
     @GET("/usuarios/verifyaccess")
     Call<VerifyAccess> verifyAccess(@Header("Authorization") String token);
+
+    @GET("usuarios/datauser")
+    Call<ProfileResponse> getProfileData(@Header("Authorization") String token);
 
     @GET("habitos/usuario")
     Call<List<UserHabit>> getUserHabits(@Header("Authorization") String token);
