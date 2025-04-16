@@ -54,8 +54,6 @@ public class HomeActivity extends AppCompatActivity {
                 toolbarTitle.setText(R.string.achievements);
             } else if (id == R.id.profileFragment) {
                 toolbarTitle.setText(R.string.profile);
-            } else {
-                toolbarTitle.setText("Habbbits");
             }
         });
     }
