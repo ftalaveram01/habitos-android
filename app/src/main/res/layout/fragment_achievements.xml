@@ -42,7 +42,6 @@
             android:paddingHorizontal="0dp"
             android:layout_margin="8dp"
             style="@style/RoundedSpinnerTheme"
-            android:background="@drawable/custom_spinner"
             />
     </LinearLayout>
 
