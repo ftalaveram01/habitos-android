@@ -9,4 +9,12 @@
         <item name="boxCornerRadiusBottomStart">10dp</item>
         <item name="boxCornerRadiusBottomEnd">10dp</item>
     </style>
+
+    <style name="RoundedSpinnerTheme" parent="Widget.AppCompat.Spinner">
+        <item name="android:background">@drawable/spinner_background</item>
+        <item name="android:popupBackground">@drawable/spinner_dropdown_background</item>
+        <item name="android:dropDownSelector"></item>
+        <item name="android:dropDownWidth">match_parent</item>
+        <item name="android:dropDownVerticalOffset">30dp</item>
+    </style>
 </resources>

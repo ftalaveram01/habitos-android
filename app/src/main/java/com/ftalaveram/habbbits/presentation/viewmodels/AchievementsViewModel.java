@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.ftalaveram.habbbits.R;
 import com.ftalaveram.habbbits.repositories.api.ApiClient;
 import com.ftalaveram.habbbits.repositories.api.ApiService;
 import com.ftalaveram.habbbits.repositories.api.RemoteDataSource;
@@ -78,7 +79,7 @@ public class AchievementsViewModel extends AndroidViewModel {
 
     public List<Achievements> filterBy(String nombre){
 
-        if (nombre.equals("*")){
+        if (nombre.equals(getApplication().getString(R.string.all))){
             return completeAchievements;
         }
 

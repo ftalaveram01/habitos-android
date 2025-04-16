@@ -83,7 +83,7 @@ public class AchievementsFragment extends Fragment {
     }
 
     private void setupSpinner(){
-        uniqueNames.add("*");
+        uniqueNames.add(getString(R.string.all));
 
         for (Achievements a : achievementsViewModel.getAchievements().getValue()){
             if (!uniqueNames.contains(a.getNombre())){
@@ -96,7 +96,7 @@ public class AchievementsFragment extends Fragment {
                 android.R.layout.simple_spinner_item,
                 uniqueNames
         );
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerAdapter.setDropDownViewResource(R.layout.custom_spinner_item);
         binding.mySpinner.setAdapter(spinnerAdapter);
 
         binding.mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
