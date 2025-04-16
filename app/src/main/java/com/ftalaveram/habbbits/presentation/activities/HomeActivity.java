@@ -32,9 +32,6 @@ public class HomeActivity extends AppCompatActivity {
 
         NavController navController = ((NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment)).getNavController();
 
-        //sirve para poner el tinte de los iconos del bottom sin tinte
-        binding.bottomNavView.setItemIconTintList(null);
-
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.myHabitsFragment, R.id.recommendedFragment, R.id.achievementsFragment, R.id.profileFragment
         ).build();
