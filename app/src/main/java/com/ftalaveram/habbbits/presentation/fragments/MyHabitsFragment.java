@@ -16,6 +16,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import com.ftalaveram.habbbits.R;
 import com.ftalaveram.habbbits.databinding.FragmentMyHabitsBinding;
 import com.ftalaveram.habbbits.presentation.adapters.MyHabbbitsRecycledViewAdapter;
 import com.ftalaveram.habbbits.presentation.viewmodels.MyHabitsViewModel;
@@ -66,5 +67,12 @@ public class MyHabitsFragment extends Fragment {
         }else{
             binding.textoVacioMyHabbbits.setVisibility(VISIBLE);
         }
+
+        binding.btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(MyHabitsFragment.this.getView()).navigate(R.id.action_myHabitsFragment_to_createHabitFragment);
+            }
+        });
     }
 }

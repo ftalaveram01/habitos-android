@@ -9,11 +9,19 @@
     <fragment
         android:id="@+id/myHabitsFragment"
         android:name="com.ftalaveram.habbbits.presentation.fragments.MyHabitsFragment"
-        tools:layout="@layout/fragment_my_habits" />
+        tools:layout="@layout/fragment_my_habits" >
+        <action
+            android:id="@+id/action_myHabitsFragment_to_createHabitFragment"
+            app:destination="@id/createHabitFragment" />
+    </fragment>
     <fragment
         android:id="@+id/recommendedFragment"
         android:name="com.ftalaveram.habbbits.presentation.fragments.RecommendedFragment"
-        tools:layout="@layout/fragment_recommended" />
+        tools:layout="@layout/fragment_recommended" >
+        <action
+            android:id="@+id/action_recommendedFragment_to_createHabitFragment"
+            app:destination="@id/createHabitFragment" />
+    </fragment>
     <fragment
         android:id="@+id/achievementsFragment"
         android:name="com.ftalaveram.habbbits.presentation.fragments.AchievementsFragment"
@@ -22,4 +30,9 @@
         android:id="@+id/profileFragment"
         android:name="com.ftalaveram.habbbits.presentation.fragments.ProfileFragment"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/createHabitFragment"
+        android:name="com.ftalaveram.habbbits.presentation.fragments.CreateHabitFragment"
+        android:label="fragment_create_habit"
+        tools:layout="@layout/fragment_create_habit" />
 </navigation>

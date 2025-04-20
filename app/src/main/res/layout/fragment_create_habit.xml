@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundGeneral"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".presentation.fragments.CreateHabitFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="Habit Name"
+        android:textColor="@color/black"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nameInputLayout"
+        style="@style/MyOutlinedTextInputLayout"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:boxBackgroundMode="outline"
+        app:boxBackgroundColor="@color/softGreen"
+        app:boxStrokeColor="@color/black"
+        app:boxStrokeWidth="1dp"
+        app:boxStrokeWidthFocused="1.2dp"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp"
+        app:hintTextColor="@color/black"
+        app:cursorColor="@color/black"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/black"
+            android:textSize="14sp"
+            android:padding="20dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="Description"
+        android:textColor="@color/black"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/descriptionInputLayout"
+        style="@style/MyOutlinedTextInputLayout"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:minHeight="150dp"
+        app:boxBackgroundMode="outline"
+        app:boxBackgroundColor="@color/softGreen"
+        app:boxStrokeColor="@color/black"
+        app:boxStrokeWidth="1dp"
+        app:boxStrokeWidthFocused="1.2dp"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp"
+        app:hintTextColor="@color/black"
+        app:cursorColor="@color/black"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/descriptionInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="150dp"
+            android:inputType="text"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/black"
+            android:textSize="14sp"
+            android:padding="20dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="Habit Name"
+        android:textColor="@color/black"/>
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/numberFrequencyInputLayout"
+            style="@style/MyOutlinedTextInputLayout"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            app:boxBackgroundMode="outline"
+            app:boxBackgroundColor="@color/softGreen"
+            app:boxStrokeColor="@color/black"
+            app:boxStrokeWidth="1dp"
+            app:boxStrokeWidthFocused="1.2dp"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:hintTextColor="@color/black"
+            app:cursorColor="@color/black"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/numberFrequencyInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/black"
+                android:textSize="14sp"
+                android:padding="20dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/frequencyInputLayout"
+            style="@style/MyOutlinedTextInputLayout"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            app:boxBackgroundMode="outline"
+            app:boxBackgroundColor="@color/softGreen"
+            app:boxStrokeColor="@color/black"
+            app:boxStrokeWidth="1dp"
+            app:boxStrokeWidthFocused="1.2dp"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:hintTextColor="@color/black"
+            app:cursorColor="@color/black"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/frequencyInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@android:color/black"
+                android:textColorHint="@color/black"
+                android:textSize="14sp"
+                android:padding="20dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+
+</LinearLayout>
