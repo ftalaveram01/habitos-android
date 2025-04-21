@@ -6,9 +6,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 
 import com.ftalaveram.habbbits.R;
 import com.ftalaveram.habbbits.databinding.FragmentCreateHabitBinding;
@@ -22,6 +26,8 @@ import com.ftalaveram.habbbits.databinding.FragmentMyHabitsBinding;
 public class CreateHabitFragment extends Fragment {
 
     private FragmentCreateHabitBinding binding;
+    private ArrayAdapter<String> spinnerAdapter;
+    private String selected = "";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -74,5 +80,29 @@ public class CreateHabitFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        setupSpinner();
+    }
+
+    private void setupSpinner(){
+
+        spinnerAdapter = new ArrayAdapter<>(
+                requireContext(),
+                R.layout.custom_spinner_item,
+                new String[]{"Hours", "Days"}
+        );
+
+        binding.frequencySpinner.setAdapter(spinnerAdapter);
+
+        binding.frequencySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selected = (String) parent.getItemAtPosition(position);
+                Log.d("DEBUG DE SPINNER", selected);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
     }
 }

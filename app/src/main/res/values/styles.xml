@@ -17,6 +17,13 @@
         <item name="android:dropDownVerticalOffset">40dp</item>
     </style>
 
+    <style name="NewHabbbitSpinnerTheme" parent="Widget.AppCompat.Spinner">
+        <item name="android:background">@drawable/dropdown_bg</item>
+        <item name="android:popupBackground">@drawable/spinner_dropdown_background</item>
+        <item name="android:dropDownWidth">match_parent</item>
+        <item name="android:dropDownVerticalOffset">40dp</item>
+    </style>
+
     <style name="ActiveIndicatorShape">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
@@ -28,5 +35,23 @@
         <item name="android:width">41dp</item>
         <item name="marginHorizontal">8dp</item>
         <item name="shapeAppearance">@style/ActiveIndicatorShape</item>
+    </style>
+
+    <!-- Estilo para los items del dropdown -->
+    <style name="DropdownItem" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">@drawable/spinner_background</item>
+    </style>
+
+    <!-- Estilo para el menú desplegable -->
+    <style name="DropdownMenu" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">@drawable/spinner_background</item>
     </style>
 </resources>
