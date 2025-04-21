@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_my_habits" >
         <action
             android:id="@+id/action_myHabitsFragment_to_createHabitFragment"
-            app:destination="@id/createHabitFragment" />
+            app:destination="@id/createHabitFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/recommendedFragment"
@@ -20,7 +22,9 @@
         tools:layout="@layout/fragment_recommended" >
         <action
             android:id="@+id/action_recommendedFragment_to_createHabitFragment"
-            app:destination="@id/createHabitFragment" />
+            app:destination="@id/createHabitFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/achievementsFragment"

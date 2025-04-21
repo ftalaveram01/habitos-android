@@ -61,10 +61,10 @@ public class CreateHabitFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            isUpdate = getArguments().getBoolean(IS_UPDATE);
-            id = getArguments().getLong(ID);
             name = getArguments().getString(NAME);
             description = getArguments().getString(DESCRIPTION);
+            isUpdate = getArguments().getBoolean(IS_UPDATE);
+            id = getArguments().getLong(ID);
             isPublic = getArguments().getBoolean(PUBLIC);
         }
         createHabitsViewModel = new ViewModelProvider(this).get(CreateHabitsViewModel.class);
@@ -82,10 +82,10 @@ public class CreateHabitFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (isUpdate != null && name != null && description != null && isPublic != null){
-            if (isUpdate){
-                setupUpdate();
-            }
+        if (isUpdate == null || name == null || description == null || isPublic == null){
+            setupCreate();
+        }else if (isUpdate){
+            setupUpdate();
         }else{
             setupCreate();
         }
