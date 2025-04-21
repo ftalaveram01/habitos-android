@@ -62,6 +62,8 @@ public class MyHabbbitsRecycledViewAdapter extends RecyclerView.Adapter<MyHabbbi
         holder.getBinding().title.setText(userHabit.getNombre());
         holder.getBinding().description.setText(userHabit.getDescripcion());
 
+        //TODO: poner las resta de las fechas
+
         holder.getBinding().btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
