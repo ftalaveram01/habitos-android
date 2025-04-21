@@ -1,6 +1,7 @@
 package com.ftalaveram.habbbits.repositories.api;
 
 import com.ftalaveram.habbbits.repositories.models.Achievements;
+import com.ftalaveram.habbbits.repositories.models.DoneResponse;
 import com.ftalaveram.habbbits.repositories.models.Habit;
 import com.ftalaveram.habbbits.repositories.models.LoginData;
 import com.ftalaveram.habbbits.repositories.models.LoginRequest;
@@ -67,6 +68,11 @@ public class RemoteDataSource {
 
     public void getAchievements(String token, final Callback<List<Achievements>> callback){
         Call<List<Achievements>> call = apiService.getAchievements(token);
+        call.enqueue(callback);
+    }
+
+    public void habitDone(String token, Long id, final Callback<DoneResponse> callback){
+        Call<DoneResponse> call = apiService.habitDone(token, id);
         call.enqueue(callback);
     }
 

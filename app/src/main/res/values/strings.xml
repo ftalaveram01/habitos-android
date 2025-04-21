@@ -6,4 +6,6 @@
     <string name="achievements">Achievements</string>
     <string name="profile">Profile</string>
     <string name="all">All</string>
+    <string name="create">Habbbits</string>
+    <string name="total_points">"Total Points: "</string>
 </resources>

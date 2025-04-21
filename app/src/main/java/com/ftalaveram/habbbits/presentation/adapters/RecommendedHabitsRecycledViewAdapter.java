@@ -1,11 +1,15 @@
 package com.ftalaveram.habbbits.presentation.adapters;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ftalaveram.habbbits.R;
 import com.ftalaveram.habbbits.databinding.ViewholderRecommendedBinding;
 import com.ftalaveram.habbbits.presentation.viewholders.RecommendedHabitsViewHolder;
 import com.ftalaveram.habbbits.repositories.models.Habit;
@@ -33,6 +37,15 @@ public class RecommendedHabitsRecycledViewAdapter extends RecyclerView.Adapter<R
         Habit habit = recommendedHabits.get(position);
         holder.getBinding().title.setText(habit.getNombre());
         holder.getBinding().description.setText(habit.getDescripcion());
+        holder.getBinding().btnUse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle args = new Bundle();
+                args.putString("name", habit.getNombre());
+                args.putString("description", habit.getDescripcion());
+                Navigation.findNavController(holder.getBinding().getRoot()).navigate(R.id.action_recommendedFragment_to_createHabitFragment, args);
+            }
+        });
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.ftalaveram.habbbits.presentation.fragments;
 
+import static android.view.View.GONE;
+
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 
@@ -23,54 +25,34 @@ import com.ftalaveram.habbbits.databinding.FragmentMyHabitsBinding;
 
 import java.util.Calendar;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CreateHabitFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class CreateHabitFragment extends Fragment {
 
     private FragmentCreateHabitBinding binding;
     private ArrayAdapter<String> spinnerAdapter;
     private String selected = "";
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String IS_UPDATE = "isUpdate";
+    private static final String ID = "id";
+    private static final String NAME = "name";
+    private static final String DESCRIPTION = "description";
+    private static final String PUBLIC = "isPublic";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private Boolean isUpdate;
+    private Long id;
+    private String name;
+    private String description;
+    private Boolean isPublic;
 
-    public CreateHabitFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CreateHabitFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CreateHabitFragment newInstance(String param1, String param2) {
-        CreateHabitFragment fragment = new CreateHabitFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            isUpdate = getArguments().getBoolean(IS_UPDATE);
+            id = getArguments().getLong(ID);
+            name = getArguments().getString(NAME);
+            description = getArguments().getString(DESCRIPTION);
+            isPublic = getArguments().getBoolean(PUBLIC);
         }
     }
 
@@ -85,6 +67,41 @@ public class CreateHabitFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        if (isUpdate != null && name != null && description != null && isPublic != null){
+            if (isUpdate){
+                setupUpdate();
+            }
+        }else{
+            setupCreate();
+        }
+    }
+
+    private void setupUpdate(){
+        binding.title.setText("UPDATE " + binding.title.getText());
+        binding.btnSend.setText("UPDATE");
+
+        binding.nameInput.setText(name);
+        binding.descriptionInput.setText(description);
+        binding.publicSwitch.setChecked(isPublic);
+
+        binding.frequencyLabel.setVisibility(GONE);
+        binding.frequencyInputs.setVisibility(GONE);
+        binding.dateLabel.setVisibility(GONE);
+        binding.dateInputLayout.setVisibility(GONE);
+    }
+
+    public void setupCreate(){
+
+        binding.title.setText("CREATE " + binding.title.getText());
+        binding.btnSend.setText("CREATE");
+
+        if (name != null){
+            binding.nameInput.setText(name);
+        }
+        if (description != null){
+            binding.descriptionInput.setText(description);
+        }
 
         setupSpinner();
         binding.dateInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {

@@ -66,7 +66,7 @@ public class AchievementsFragment extends Fragment {
             recycledViewAdapter.setAchievements(achievements);
             recycledViewAdapter.notifyDataSetChanged();
             setupSpinner();
-            binding.puntuacionTotal.setText(binding.puntuacionTotal.getText() + String.valueOf(achievementsViewModel.getTotalPoints()));
+            binding.puntuacionTotal.setText(getString(R.string.total_points) + String.valueOf(achievementsViewModel.getTotalPoints()));
 
             if(recycledViewAdapter.getItemCount() > 0){
                 binding.textoVacioAchievements.setVisibility(GONE);
@@ -80,6 +80,12 @@ public class AchievementsFragment extends Fragment {
         }else{
             binding.textoVacioAchievements.setVisibility(VISIBLE);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        achievementsViewModel.rechargeAchievements();
     }
 
     private void setupSpinner(){

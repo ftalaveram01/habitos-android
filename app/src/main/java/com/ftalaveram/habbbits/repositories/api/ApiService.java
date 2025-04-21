@@ -5,8 +5,10 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 import com.ftalaveram.habbbits.repositories.models.Achievements;
+import com.ftalaveram.habbbits.repositories.models.DoneResponse;
 import com.ftalaveram.habbbits.repositories.models.Habit;
 import com.ftalaveram.habbbits.repositories.models.LoginData;
 import com.ftalaveram.habbbits.repositories.models.LoginRequest;
@@ -40,4 +42,7 @@ public interface ApiService {
 
     @GET("/historial")
     Call<List<Achievements>> getAchievements(@Header("Authorization") String token);
+
+    @POST("/historial/{id}")
+    Call<DoneResponse> habitDone(@Header("Authorization") String token, @Path("id") Long id);
 }

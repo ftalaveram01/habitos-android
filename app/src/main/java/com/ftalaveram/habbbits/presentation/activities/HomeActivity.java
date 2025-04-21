@@ -1,5 +1,8 @@
 package com.ftalaveram.habbbits.presentation.activities;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -7,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
@@ -38,6 +42,8 @@ public class HomeActivity extends AppCompatActivity {
 
         NavigationUI.setupWithNavController(binding.bottomNavView, navController);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(false);
 
         TextView toolbarTitle = binding.toolbar.findViewById(R.id.toolbar_title);
 
@@ -45,13 +51,29 @@ public class HomeActivity extends AppCompatActivity {
             int id = destination.getId();
             if (id == R.id.myHabitsFragment) {
                 toolbarTitle.setText(R.string.my_habbbits);
+                binding.bottomNavView.setVisibility(VISIBLE);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             } else if (id == R.id.recommendedFragment) {
                 toolbarTitle.setText(R.string.recommended);
+                binding.bottomNavView.setVisibility(VISIBLE);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             } else if (id == R.id.achievementsFragment) {
                 toolbarTitle.setText(R.string.achievements);
             } else if (id == R.id.profileFragment) {
                 toolbarTitle.setText(R.string.profile);
+            } else if (id == R.id.createHabitFragment){
+                toolbarTitle.setText(R.string.create);
+                binding.bottomNavView.setVisibility(GONE);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             }
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        return NavigationUI.navigateUp(navController, new AppBarConfiguration.Builder(
+                R.id.myHabitsFragment, R.id.recommendedFragment, R.id.achievementsFragment, R.id.profileFragment
+        ).build()) || super.onSupportNavigateUp();
     }
 }

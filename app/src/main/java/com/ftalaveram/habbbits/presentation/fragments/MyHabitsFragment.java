@@ -45,7 +45,7 @@ public class MyHabitsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Configurar RecyclerView
-        recycledViewAdapter = new MyHabbbitsRecycledViewAdapter();
+        recycledViewAdapter = new MyHabbbitsRecycledViewAdapter(this.getActivity().getApplication());
         GridLayoutManager grid = new GridLayoutManager(getContext(), 1);
         binding.recyclerViewMyHabbbits.setLayoutManager(grid);
         binding.recyclerViewMyHabbbits.setAdapter(recycledViewAdapter);
