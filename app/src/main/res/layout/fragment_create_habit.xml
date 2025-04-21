@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textSize="40sp"
+        android:textSize="34sp"
         android:textStyle="bold"
         android:text="HABBBIT"
         android:textColor="@color/black"
@@ -26,7 +26,8 @@
         android:orientation="vertical"
         android:gravity="center"
         android:layout_gravity="center"
-        android:padding="20dp"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="20dp"
         android:background="@drawable/profile_form_container"
         >
         <TextView
@@ -65,7 +66,7 @@
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/black"
                 android:textSize="14sp"
-                android:padding="20dp"/>
+                android:padding="16dp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -83,7 +84,7 @@
             style="@style/MyOutlinedTextInputLayout"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:minHeight="150dp"
+            android:minHeight="120dp"
             app:boxBackgroundMode="outline"
             app:boxBackgroundColor="@color/softGreen"
             app:boxStrokeColor="@color/black"
@@ -101,13 +102,13 @@
                 android:id="@+id/descriptionInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="150dp"
-                android:maxHeight="200dp"
+                android:minHeight="120dp"
+                android:maxHeight="150dp"
                 android:inputType="textMultiLine"
                 android:textColor="@android:color/black"
                 android:textColorHint="@color/black"
                 android:textSize="14sp"
-                android:padding="20dp"
+                android:padding="16dp"
                 android:gravity="start"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -153,7 +154,7 @@
                     android:textColor="@android:color/black"
                     android:textColorHint="@color/black"
                     android:textSize="14sp"
-                    android:padding="20dp"/>
+                    android:padding="16dp"/>
             </com.google.android.material.textfield.TextInputLayout>
             <Spinner
                 android:id="@+id/frequency_spinner"
@@ -161,9 +162,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:textSize="14sp"
                 android:textAlignment="center"
                 android:paddingHorizontal="0dp"
-                android:paddingVertical="7dp"
+                android:paddingVertical="3dp"
                 android:layout_marginTop="2dp"
                 style="@style/NewHabbbitSpinnerTheme"
                 />
@@ -238,7 +240,7 @@
             android:textStyle="bold"
             android:paddingHorizontal="60dp"
             android:paddingVertical="16dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:backgroundTint="@color/purple"
             android:textColor="@color/white"
             />
