@@ -1,5 +1,6 @@
 package com.ftalaveram.habbbits.presentation.fragments;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,10 +14,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.DatePicker;
+import android.widget.EditText;
 
 import com.ftalaveram.habbbits.R;
 import com.ftalaveram.habbbits.databinding.FragmentCreateHabitBinding;
 import com.ftalaveram.habbbits.databinding.FragmentMyHabitsBinding;
+
+import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -82,6 +87,21 @@ public class CreateHabitFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         setupSpinner();
+        binding.dateInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus){
+                    mostrarDatePicker();
+                }
+            }
+        });
+
+        binding.dateInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mostrarDatePicker();
+            }
+        });
     }
 
     private void setupSpinner(){
@@ -104,5 +124,23 @@ public class CreateHabitFragment extends Fragment {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
+    }
+
+    private void mostrarDatePicker() {
+        DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int anio, int mes, int dia) {
+                binding.dateInput.setText(dia + "/" + (mes + 1) + "/" + anio);
+            }
+        };
+
+        Calendar calendar = Calendar.getInstance();
+        int dia = calendar.get(Calendar.DAY_OF_MONTH);
+        int mes = calendar.get(Calendar.MONTH);
+        int anio = calendar.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), listener, anio, mes, dia);
+        datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis());
+        datePickerDialog.show();
     }
 }

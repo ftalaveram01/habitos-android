@@ -18,8 +18,8 @@
     </style>
 
     <style name="NewHabbbitSpinnerTheme" parent="Widget.AppCompat.Spinner">
-        <item name="android:background">@drawable/dropdown_bg</item>
-        <item name="android:popupBackground">@drawable/spinner_dropdown_background</item>
+        <item name="android:background">@drawable/spinner_bg</item>
+        <item name="android:popupBackground">@drawable/spinner_dropdown_bg</item>
         <item name="android:dropDownWidth">match_parent</item>
         <item name="android:dropDownVerticalOffset">40dp</item>
     </style>
