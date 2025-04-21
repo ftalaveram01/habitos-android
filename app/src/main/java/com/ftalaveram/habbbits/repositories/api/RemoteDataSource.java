@@ -1,6 +1,8 @@
 package com.ftalaveram.habbbits.repositories.api;
 
 import com.ftalaveram.habbbits.repositories.models.Achievements;
+import com.ftalaveram.habbbits.repositories.models.CreateRequest;
+import com.ftalaveram.habbbits.repositories.models.CreateResponse;
 import com.ftalaveram.habbbits.repositories.models.DoneResponse;
 import com.ftalaveram.habbbits.repositories.models.Habit;
 import com.ftalaveram.habbbits.repositories.models.LoginData;
@@ -11,6 +13,7 @@ import com.ftalaveram.habbbits.repositories.models.RegisterResponse;
 import com.ftalaveram.habbbits.repositories.models.UserHabit;
 import com.ftalaveram.habbbits.repositories.models.VerifyAccess;
 
+import java.net.CacheRequest;
 import java.util.List;
 
 import retrofit2.Call;
@@ -59,6 +62,11 @@ public class RemoteDataSource {
 
     public void getRecommendedHabits(final Callback<List<Habit>> callback){
         Call<List<Habit>> call = apiService.getHabitosRecomendados();
+        call.enqueue(callback);
+    }
+
+    public void createHabit(String token, CreateRequest request, final Callback<CreateResponse> callback){
+        Call<CreateResponse> call = apiService.createHabit(token, request);
         call.enqueue(callback);
     }
 

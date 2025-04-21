@@ -8,4 +8,7 @@
     <string name="all">All</string>
     <string name="create">Habbbits</string>
     <string name="total_points">"Total Points: "</string>
+    <string name="hours">Hours</string>
+    <string name="days">Days</string>
+    <string name="created">Habit created</string>
 </resources>

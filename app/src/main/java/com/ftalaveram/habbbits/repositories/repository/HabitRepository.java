@@ -1,6 +1,8 @@
 package com.ftalaveram.habbbits.repositories.repository;
 
 import com.ftalaveram.habbbits.repositories.api.RemoteDataSource;
+import com.ftalaveram.habbbits.repositories.models.CreateRequest;
+import com.ftalaveram.habbbits.repositories.models.CreateResponse;
 import com.ftalaveram.habbbits.repositories.models.Habit;
 import com.ftalaveram.habbbits.repositories.models.UserHabit;
 
@@ -22,5 +24,9 @@ public class HabitRepository {
 
     public void getRecommendedHabits(Callback<List<Habit>> callback){
         remoteDataSource.getRecommendedHabits(callback);
+    }
+
+    public void createHabit(String token, CreateRequest request, Callback<CreateResponse> callback){
+        remoteDataSource.createHabit(token, request, callback);
     }
 }
