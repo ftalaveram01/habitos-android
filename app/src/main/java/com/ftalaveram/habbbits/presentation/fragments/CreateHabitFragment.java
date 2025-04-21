@@ -165,8 +165,6 @@ public class CreateHabitFragment extends Fragment {
 
                 boolean publico = binding.publicSwitch.isChecked();
 
-                Log.d("DATOS PARA ENVIAR", nombre + ", " + descripcion + ", " + creadoEn + ", " + fechaInicio + ", " + String.valueOf(horasIntervalo) + ", " + publico);
-
                 createHabitsViewModel.createHabit(nombre, descripcion, creadoEn, fechaInicio, horasIntervalo, publico);
 
                 createHabitsViewModel.createLiveData.observe(getViewLifecycleOwner(), new Observer<CreateResponse>() {
