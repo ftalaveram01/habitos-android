@@ -55,22 +55,12 @@ public class MyHabitsFragment extends Fragment {
 
         // Observar cambios en los datos
         myHabitsViewModel.habitsLiveData.observe(getViewLifecycleOwner(), habits -> {
-            Log.e("RECARGANDO...", "");
             recycledViewAdapter.setMyHabbbits(habits);
 
             if(recycledViewAdapter.getItemCount() > 0){
                 binding.textoVacioMyHabbbits.setVisibility(GONE);
             }else{
                 binding.textoVacioMyHabbbits.setVisibility(VISIBLE);
-            }
-        });
-
-        myHabitsViewModel.deleteLiveData.observe(getViewLifecycleOwner(), success -> {
-            Log.e("VALOR DE SUCCESS", success.toString());
-            if (success != null) {
-                if (success) {
-                    Log.d("DEBUG EN FRAGMENT", "SE HA LLEGADO A DESPUES DEL RECHARGE");
-                }
             }
         });
 

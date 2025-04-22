@@ -129,8 +129,4 @@ public class MyHabbbitsRecycledViewAdapter extends RecyclerView.Adapter<MyHabbbi
         this.myHabbbits = myHabbbits;
         notifyDataSetChanged();
     }
-
-    private void deleteHabitFromList(Long id){
-        myHabbbits.removeIf(h -> Objects.equals(h.getId(), id));
-    }
 }

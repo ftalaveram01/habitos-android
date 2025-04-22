@@ -80,17 +80,14 @@ public class MyHabitsViewModel extends AndroidViewModel {
                 if (response.isSuccessful()) {
                     loadHabits();
                     deleteLiveData.postValue(true);
-                    Log.d("DELETE", "Eliminación exitosa, recargando hábitos");
                 } else {
                     deleteLiveData.postValue(false);
-                    Log.e("DELETE", "Error en la respuesta: " + response.code());
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 deleteLiveData.postValue(false);
-                Log.e("DELETE", "Fallo en la llamada: " + t.getMessage());
             }
         });
     }

@@ -49,7 +49,7 @@ public class ModalDeleteFragment extends DialogFragment {
                     if (success) {
                         Toast.makeText(requireContext(), "Hábito eliminado", Toast.LENGTH_SHORT).show();
                     }
-                    dismiss(); // Cerrar después de la operación
+                    dismiss();
                     myHabitsViewModel.deleteLiveData.removeObservers(getViewLifecycleOwner());
                 }
             });
