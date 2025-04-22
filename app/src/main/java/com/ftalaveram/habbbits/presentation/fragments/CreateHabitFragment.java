@@ -38,6 +38,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.TimeZone;
 
 public class CreateHabitFragment extends Fragment {
@@ -110,19 +111,33 @@ public class CreateHabitFragment extends Fragment {
         binding.btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nombre = String.valueOf(binding.nameInput.getText());
-                String descripcion = String.valueOf(binding.descriptionInput.getText());
+                String nombre = "";
+
+                if (validName()){
+                    nombre = String.valueOf(binding.nameInput.getText());
+                }
+
+                String descripcion = "";
+
+                if (validDescription()){
+                    descripcion = String.valueOf(binding.descriptionInput.getText());
+                }
+
                 boolean publico = binding.publicSwitch.isChecked();
 
-                createHabitsViewModel.updateHabit(nombre, descripcion, publico, id);
+                if (validUpdate(nombre, descripcion)){
+                    createHabitsViewModel.updateHabit(nombre, descripcion, publico, id);
 
-                createHabitsViewModel.updateLiveData.observe(getViewLifecycleOwner(), new Observer<UpdateResponse>() {
-                    @Override
-                    public void onChanged(UpdateResponse updateResponse) {
-                        Toast.makeText(getContext(), getContext().getString(R.string.updated), Toast.LENGTH_SHORT).show();
-                        Navigation.findNavController(v).navigateUp();
-                    }
-                });
+                    createHabitsViewModel.updateLiveData.observe(getViewLifecycleOwner(), new Observer<UpdateResponse>() {
+                        @Override
+                        public void onChanged(UpdateResponse updateResponse) {
+                            Toast.makeText(getContext(), getContext().getString(R.string.updated), Toast.LENGTH_SHORT).show();
+                            Navigation.findNavController(v).navigateUp();
+                        }
+                    });
+                }else{
+                    Toast.makeText(getContext(), getText(R.string.update_not_valid), Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -159,8 +174,17 @@ public class CreateHabitFragment extends Fragment {
         binding.btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nombre = String.valueOf(binding.nameInput.getText());
-                String descripcion = String.valueOf(binding.descriptionInput.getText());
+                String nombre = "";
+
+                if (validName()){
+                    nombre = String.valueOf(binding.nameInput.getText());
+                }
+
+                String descripcion = "";
+
+                if (validDescription()){
+                    descripcion = String.valueOf(binding.descriptionInput.getText());
+                }
 
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
                 sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -170,32 +194,46 @@ public class CreateHabitFragment extends Fragment {
                 String fechaOriginal = String.valueOf(binding.dateInput.getText());
                 SimpleDateFormat formatoEntrada = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
                 Date date = null;
-                try {
-                    date = formatoEntrada.parse(fechaOriginal);
-                } catch (ParseException e) {
-                    throw new RuntimeException(e);
+                String fechaInicio = "";
+
+                if (validInitialDate()){
+                    try {
+                        date = formatoEntrada.parse(fechaOriginal);
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    SimpleDateFormat formatoSalida = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+                    formatoSalida.setTimeZone(TimeZone.getTimeZone("UTC"));
+                    fechaInicio = formatoSalida.format(date);
                 }
 
-                SimpleDateFormat formatoSalida = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
-                formatoSalida.setTimeZone(TimeZone.getTimeZone("UTC"));
-                String fechaInicio = formatoSalida.format(date);
+                int horasIntervalo = 0;
 
-                int horasIntervalo = Integer.parseInt(String.valueOf(binding.numberFrequencyInput.getText()));
-                if (String.valueOf(binding.frequencySpinner.getSelectedItem()).equals(getContext().getString(R.string.days))){
-                    horasIntervalo *= 24;
+                if (validNumber()){
+                    horasIntervalo = Integer.parseInt(String.valueOf(binding.numberFrequencyInput.getText()));
+                    if (String.valueOf(binding.frequencySpinner.getSelectedItem()).equals(getContext().getString(R.string.days))){
+                        horasIntervalo *= 24;
+                    }
+                }else{
+                    binding.numberFrequencyInput.setError("Required");
                 }
 
                 boolean publico = binding.publicSwitch.isChecked();
 
-                createHabitsViewModel.createHabit(nombre, descripcion, creadoEn, fechaInicio, horasIntervalo, publico);
+                if (validCreate(nombre, descripcion, creadoEn, fechaInicio, horasIntervalo)){
+                    createHabitsViewModel.createHabit(nombre, descripcion, creadoEn, fechaInicio, horasIntervalo, publico);
 
-                createHabitsViewModel.createLiveData.observe(getViewLifecycleOwner(), new Observer<CreateResponse>() {
-                    @Override
-                    public void onChanged(CreateResponse createResponse) {
-                        Toast.makeText(getContext(), getContext().getString(R.string.created), Toast.LENGTH_SHORT).show();
-                        Navigation.findNavController(v).navigateUp();
-                    }
-                });
+                    createHabitsViewModel.createLiveData.observe(getViewLifecycleOwner(), new Observer<CreateResponse>() {
+                        @Override
+                        public void onChanged(CreateResponse createResponse) {
+                            Toast.makeText(getContext(), getContext().getString(R.string.created), Toast.LENGTH_SHORT).show();
+                            Navigation.findNavController(v).navigateUp();
+                        }
+                    });
+                }else{
+                    Toast.makeText(getContext(), getText(R.string.update_not_valid), Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -223,7 +261,7 @@ public class CreateHabitFragment extends Fragment {
     }
 
     private void mostrarDatePicker() {
-        // Primero mostramos el DatePickerDialog
+
         Calendar calendar = Calendar.getInstance();
         int dia = calendar.get(Calendar.DAY_OF_MONTH);
         int mes = calendar.get(Calendar.MONTH);
@@ -256,5 +294,55 @@ public class CreateHabitFragment extends Fragment {
 
         datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis());
         datePickerDialog.show();
+    }
+
+    private boolean validUpdate(String name, String description){
+        if (name != null && description != null){
+            if (!name.isEmpty() && !description.isEmpty()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean validCreate(String name, String description, String creadoEn, String fechaInicio, int horasIntervalo){
+        if (name != null && description != null && creadoEn != null && fechaInicio != null){
+            if (!name.isEmpty() && !description.isEmpty() && !creadoEn.isEmpty() && !fechaInicio.isEmpty() && horasIntervalo > 0){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean validName(){
+        if (Objects.equals(Objects.requireNonNull(binding.nameInput.getText()).toString(), "")){
+            binding.nameInput.setError(getString(R.string.required));
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validDescription(){
+        if (Objects.equals(Objects.requireNonNull(binding.descriptionInput.getText()).toString(), "")){
+            binding.descriptionInput.setError(getString(R.string.required));
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validNumber(){
+        if (Objects.equals(Objects.requireNonNull(binding.numberFrequencyInput.getText()).toString(), "")){
+            binding.numberFrequencyInput.setError(getString(R.string.required));
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validInitialDate(){
+        if (Objects.equals(Objects.requireNonNull(binding.dateInput.getText()).toString(), "")){
+            binding.dateInput.setError(getString(R.string.required));
+            return false;
+        }
+        return true;
     }
 }

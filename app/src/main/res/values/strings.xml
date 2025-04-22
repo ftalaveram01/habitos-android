@@ -16,4 +16,6 @@
     <string name="create_title_right_space">CREATE %s</string>
     <string name="update_title">UPDATE</string>
     <string name="update_title_right_space">UPDATE %s</string>
+    <string name="update_not_valid">Should complete all the fields</string>
+    <string name="required">Required</string>
 </resources>
