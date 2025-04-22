@@ -52,9 +52,7 @@ public class MyHabitsViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<List<UserHabit>> call, Response<List<UserHabit>> response) {
                 if (response.body() != null && response.isSuccessful()){
-                    Log.e("DEBUG DE LOADHABITS EN VIEWMODEL", "HA LLEGADO A HACER POST CON LISTA");
                     habitsLiveData.postValue(response.body());
-                    Log.e("DEBUG DE LOADHABITS EN VIEWMODEL", response.body().toString());
                 }
                 else{
                     habitsLiveData.postValue(new ArrayList<>());
