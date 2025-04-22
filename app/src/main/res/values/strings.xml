@@ -19,4 +19,5 @@
     <string name="update_not_valid">Should complete all the fields</string>
     <string name="required">Required</string>
     <string name="too_late">TOO LATE...</string>
+    <string name="time_left">Days: %s, Hours: %s</string>
 </resources>

@@ -70,7 +70,7 @@ public class MyHabbbitsRecycledViewAdapter extends RecyclerView.Adapter<MyHabbbi
             int dias = (int) Math.floor((double) diferenciaMs / (1000 * 60 * 60 * 24));
             int horas = (int) Math.floor((double) (diferenciaMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 
-            holder.getBinding().timeLeft.setText("Days: " + dias + ", Hours: " + horas);
+            holder.getBinding().timeLeft.setText(holder.getBinding().getRoot().getContext().getString(R.string.time_left, String.valueOf(dias), String.valueOf(horas)));
         }
 
         holder.getBinding().btnDone.setOnClickListener(new View.OnClickListener() {
