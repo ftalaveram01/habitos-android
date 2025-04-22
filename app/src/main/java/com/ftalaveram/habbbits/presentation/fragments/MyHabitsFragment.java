@@ -33,7 +33,7 @@ public class MyHabitsFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        myHabitsViewModel = new ViewModelProvider(this).get(MyHabitsViewModel.class);
+        myHabitsViewModel = new ViewModelProvider(requireActivity()).get(MyHabitsViewModel.class);
     }
 
     @Override
@@ -57,7 +57,6 @@ public class MyHabitsFragment extends Fragment {
         myHabitsViewModel.habitsLiveData.observe(getViewLifecycleOwner(), habits -> {
             Log.e("RECARGANDO...", "");
             recycledViewAdapter.setMyHabbbits(habits);
-            recycledViewAdapter.notifyDataSetChanged();
 
             if(recycledViewAdapter.getItemCount() > 0){
                 binding.textoVacioMyHabbbits.setVisibility(GONE);
@@ -70,13 +69,9 @@ public class MyHabitsFragment extends Fragment {
             Log.e("VALOR DE SUCCESS", success.toString());
             if (success != null) {
                 if (success) {
-                    Toast.makeText(requireContext(), "HABIT DELETED", Toast.LENGTH_SHORT).show();
                     Log.d("DEBUG EN FRAGMENT", "SE HA LLEGADO A DESPUES DEL RECHARGE");
-                } else {
-                    Toast.makeText(requireContext(), "FAIL DELETING", Toast.LENGTH_SHORT).show();
                 }
             }
-            myHabitsViewModel.rechargeHabits();
         });
 
         if(recycledViewAdapter.getItemCount() > 0){

@@ -77,18 +77,20 @@ public class MyHabitsViewModel extends AndroidViewModel {
         repository.deleteHabit("Bearer " + sessionManager.getToken(), id, new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
+                    loadHabits();
                     deleteLiveData.postValue(true);
-                    rechargeHabits();
-                    Log.e("DEBUG DE DELETEHABIT EN VIEWMODEL", "HA LLEGADO A HACER POST CON TRUE");
-                }else{
+                    Log.d("DELETE", "Eliminación exitosa, recargando hábitos");
+                } else {
                     deleteLiveData.postValue(false);
+                    Log.e("DELETE", "Error en la respuesta: " + response.code());
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-
+                deleteLiveData.postValue(false);
+                Log.e("DELETE", "Fallo en la llamada: " + t.getMessage());
             }
         });
     }

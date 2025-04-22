@@ -26,7 +26,7 @@ public class ModalDeleteFragment extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        myHabitsViewModel = new ViewModelProvider(this).get(MyHabitsViewModel.class);
+        myHabitsViewModel = new ViewModelProvider(requireActivity()).get(MyHabitsViewModel.class);
         Bundle args = getArguments();
 
         if (args != null){
@@ -44,7 +44,15 @@ public class ModalDeleteFragment extends DialogFragment {
             if (myHabitsViewModel.getHabitId() != -1)
                 myHabitsViewModel.deleteHabit(myHabitsViewModel.getHabitId());
 
-            dismiss();
+            myHabitsViewModel.deleteLiveData.observe(getViewLifecycleOwner(), success -> {
+                if (success != null) {
+                    if (success) {
+                        Toast.makeText(requireContext(), "Hábito eliminado", Toast.LENGTH_SHORT).show();
+                    }
+                    dismiss(); // Cerrar después de la operación
+                    myHabitsViewModel.deleteLiveData.removeObservers(getViewLifecycleOwner());
+                }
+            });
 
         });
 

@@ -28,6 +28,7 @@ import com.ftalaveram.habbbits.session.SessionManager;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -127,5 +128,9 @@ public class MyHabbbitsRecycledViewAdapter extends RecyclerView.Adapter<MyHabbbi
     public void setMyHabbbits(List<UserHabit> myHabbbits) {
         this.myHabbbits = myHabbbits;
         notifyDataSetChanged();
+    }
+
+    private void deleteHabitFromList(Long id){
+        myHabbbits.removeIf(h -> Objects.equals(h.getId(), id));
     }
 }
