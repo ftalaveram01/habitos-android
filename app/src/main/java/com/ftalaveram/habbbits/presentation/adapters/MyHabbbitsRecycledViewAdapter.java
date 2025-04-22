@@ -9,11 +9,14 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ftalaveram.habbbits.R;
 import com.ftalaveram.habbbits.databinding.ViewholderHabitoBinding;
+import com.ftalaveram.habbbits.presentation.fragments.ModalDeleteFragment;
 import com.ftalaveram.habbbits.presentation.viewholders.MyHabbbitsViewHolder;
 import com.ftalaveram.habbbits.repositories.api.ApiClient;
 import com.ftalaveram.habbbits.repositories.api.ApiService;
@@ -38,9 +41,11 @@ public class MyHabbbitsRecycledViewAdapter extends RecyclerView.Adapter<MyHabbbi
     RemoteDataSource remoteDataSource = new RemoteDataSource(apiService);
     AchievementsRepository repository = new AchievementsRepository(remoteDataSource);
     private final SessionManager sessionManager;
+    private final FragmentManager fragmentManager;
 
-    public MyHabbbitsRecycledViewAdapter(Application application) {
+    public MyHabbbitsRecycledViewAdapter(Application application, FragmentManager fragmentManager) {
         sessionManager = new SessionManager(application.getApplicationContext());
+        this.fragmentManager = fragmentManager;
     }
 
     @NonNull
@@ -102,6 +107,19 @@ public class MyHabbbitsRecycledViewAdapter extends RecyclerView.Adapter<MyHabbbi
                 args.putString("description", userHabit.getDescripcion());
                 args.putBoolean("isPublic", userHabit.isPublico());
                 Navigation.findNavController(holder.getBinding().getRoot()).navigate(R.id.action_myHabitsFragment_to_createHabitFragment, args);
+            }
+        });
+
+        holder.getBinding().btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ModalDeleteFragment modal = new ModalDeleteFragment();
+
+                Bundle args = new Bundle();
+                args.putLong("id", userHabit.getId());
+                modal.setArguments(args);
+
+                modal.show(fragmentManager, "ModalDelete");
             }
         });
     }
