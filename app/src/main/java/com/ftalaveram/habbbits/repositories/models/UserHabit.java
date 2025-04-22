@@ -1,9 +1,12 @@
 package com.ftalaveram.habbbits.repositories.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 public class UserHabit extends Habit{
     private Long id;
+    @SerializedName("fecha_nueva_actualizacion")
     private Date fechaNuevaActualizacion;
     private int publico;
 

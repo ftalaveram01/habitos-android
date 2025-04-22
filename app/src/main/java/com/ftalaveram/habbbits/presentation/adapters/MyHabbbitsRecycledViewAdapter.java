@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,10 +21,9 @@ import com.ftalaveram.habbbits.repositories.api.RemoteDataSource;
 import com.ftalaveram.habbbits.repositories.models.DoneResponse;
 import com.ftalaveram.habbbits.repositories.models.UserHabit;
 import com.ftalaveram.habbbits.repositories.repository.AchievementsRepository;
-import com.ftalaveram.habbbits.repositories.repository.HabitRepository;
 import com.ftalaveram.habbbits.session.SessionManager;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -39,7 +37,7 @@ public class MyHabbbitsRecycledViewAdapter extends RecyclerView.Adapter<MyHabbbi
     ApiService apiService = ApiClient.getApiService();
     RemoteDataSource remoteDataSource = new RemoteDataSource(apiService);
     AchievementsRepository repository = new AchievementsRepository(remoteDataSource);
-    private SessionManager sessionManager;
+    private final SessionManager sessionManager;
 
     public MyHabbbitsRecycledViewAdapter(Application application) {
         sessionManager = new SessionManager(application.getApplicationContext());
@@ -62,6 +60,18 @@ public class MyHabbbitsRecycledViewAdapter extends RecyclerView.Adapter<MyHabbbi
         holder.getBinding().title.setText(userHabit.getNombre());
         holder.getBinding().description.setText(userHabit.getDescripcion());
 
+        Log.d("FECHA DE MY HABBBIT", userHabit.getFechaNuevaActualizacion().toString());
+
+        Long diferenciaMs = userHabit.getFechaNuevaActualizacion().getTime() - new Date().getTime();
+
+        if (diferenciaMs <= 0){
+            holder.getBinding().timeLeft.setText(R.string.too_late);
+        }else{
+            int dias = (int) Math.floor((double) diferenciaMs / (1000 * 60 * 60 * 24));
+            int horas = (int) Math.floor((double) (diferenciaMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+            holder.getBinding().timeLeft.setText("Days: " + dias + ", Hours: " + horas);
+        }
         //TODO: poner las resta de las fechas
 
         holder.getBinding().btnDone.setOnClickListener(new View.OnClickListener() {
