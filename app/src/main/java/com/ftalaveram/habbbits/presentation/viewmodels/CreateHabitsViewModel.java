@@ -11,6 +11,8 @@ import com.ftalaveram.habbbits.repositories.api.ApiService;
 import com.ftalaveram.habbbits.repositories.api.RemoteDataSource;
 import com.ftalaveram.habbbits.repositories.models.CreateRequest;
 import com.ftalaveram.habbbits.repositories.models.CreateResponse;
+import com.ftalaveram.habbbits.repositories.models.UpdateRequest;
+import com.ftalaveram.habbbits.repositories.models.UpdateResponse;
 import com.ftalaveram.habbbits.repositories.repository.HabitRepository;
 import com.ftalaveram.habbbits.session.SessionManager;
 
@@ -26,6 +28,7 @@ public class CreateHabitsViewModel extends AndroidViewModel {
     private SessionManager sessionManager;
 
     public final MutableLiveData<CreateResponse> createLiveData = new MutableLiveData<>();
+    public final MutableLiveData<UpdateResponse> updateLiveData = new MutableLiveData<>();
 
     public CreateHabitsViewModel(@NonNull Application application){
         super(application);
@@ -45,6 +48,24 @@ public class CreateHabitsViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(Call<CreateResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void updateHabit(String nombre, String descripcion, boolean publico, Long id){
+        UpdateRequest request = new UpdateRequest(nombre, descripcion, publico);
+
+        repository.updateHabit("Bearer " + sessionManager.getToken(), request, id, new Callback<UpdateResponse>() {
+            @Override
+            public void onResponse(Call<UpdateResponse> call, Response<UpdateResponse> response) {
+                if (response.isSuccessful() && response.body() != null){
+                    updateLiveData.postValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UpdateResponse> call, Throwable t) {
 
             }
         });

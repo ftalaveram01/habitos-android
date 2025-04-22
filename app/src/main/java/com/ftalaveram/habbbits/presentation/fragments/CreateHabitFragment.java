@@ -31,6 +31,7 @@ import com.ftalaveram.habbbits.databinding.FragmentMyHabitsBinding;
 import com.ftalaveram.habbbits.presentation.viewmodels.AchievementsViewModel;
 import com.ftalaveram.habbbits.presentation.viewmodels.CreateHabitsViewModel;
 import com.ftalaveram.habbbits.repositories.models.CreateResponse;
+import com.ftalaveram.habbbits.repositories.models.UpdateResponse;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -105,6 +106,25 @@ public class CreateHabitFragment extends Fragment {
         binding.frequencyInputs.setVisibility(GONE);
         binding.dateLabel.setVisibility(GONE);
         binding.dateInputLayout.setVisibility(GONE);
+
+        binding.btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String nombre = String.valueOf(binding.nameInput.getText());
+                String descripcion = String.valueOf(binding.descriptionInput.getText());
+                boolean publico = binding.publicSwitch.isChecked();
+
+                createHabitsViewModel.updateHabit(nombre, descripcion, publico, id);
+
+                createHabitsViewModel.updateLiveData.observe(getViewLifecycleOwner(), new Observer<UpdateResponse>() {
+                    @Override
+                    public void onChanged(UpdateResponse updateResponse) {
+                        Toast.makeText(getContext(), getContext().getString(R.string.updated), Toast.LENGTH_SHORT).show();
+                        Navigation.findNavController(v).navigateUp();
+                    }
+                });
+            }
+        });
     }
 
     public void setupCreate(){
