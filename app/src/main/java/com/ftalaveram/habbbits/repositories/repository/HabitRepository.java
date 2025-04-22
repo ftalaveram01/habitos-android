@@ -35,4 +35,8 @@ public class HabitRepository {
     public void updateHabit(String token, UpdateRequest request, Long id, Callback<UpdateResponse> callback){
         remoteDataSource.updateHabit(token, request, id, callback);
     }
+
+    public void deleteHabit(String token, Long id, Callback<Void> callback){
+        remoteDataSource.deleteHabit(token, id, callback);
+    }
 }

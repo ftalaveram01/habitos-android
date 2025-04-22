@@ -77,6 +77,11 @@ public class RemoteDataSource {
         call.enqueue(callback);
     }
 
+    public void deleteHabit(String token, Long id, final Callback<Void> callback){
+        Call<Void> call = apiService.deleteHabit(token, id);
+        call.enqueue(callback);
+    }
+
     //-------------------------------------------------------------------------------------------------
     //-----------------------------------ACHIEVEMENTS METHODS-------------------------------------------------
     //-------------------------------------------------------------------------------------------------

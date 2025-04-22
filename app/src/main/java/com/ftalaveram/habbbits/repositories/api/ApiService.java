@@ -2,6 +2,7 @@ package com.ftalaveram.habbbits.repositories.api;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -50,6 +51,9 @@ public interface ApiService {
 
     @PUT("/habitos/{id}")
     Call<UpdateResponse> updateHabit(@Header("Authorization") String token, @Body UpdateRequest request, @Path("id") Long id);
+
+    @DELETE("/habitos/{id}")
+    Call<Void> deleteHabit(@Header("Authorization") String token, @Path("id") Long id);
 
     @GET("/historial")
     Call<List<Achievements>> getAchievements(@Header("Authorization") String token);
