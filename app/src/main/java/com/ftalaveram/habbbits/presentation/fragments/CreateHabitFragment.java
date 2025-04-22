@@ -95,8 +95,8 @@ public class CreateHabitFragment extends Fragment {
     }
 
     private void setupUpdate(){
-        binding.title.setText("UPDATE " + binding.title.getText());
-        binding.btnSend.setText("UPDATE");
+        binding.title.setText(getString(R.string.update_title_right_space, binding.title.getText()));
+        binding.btnSend.setText(getString(R.string.update_title));
 
         binding.nameInput.setText(name);
         binding.descriptionInput.setText(description);
@@ -129,8 +129,8 @@ public class CreateHabitFragment extends Fragment {
 
     public void setupCreate(){
 
-        binding.title.setText("CREATE " + binding.title.getText());
-        binding.btnSend.setText("CREATE");
+        binding.title.setText(getString(R.string.create_title_right_space, binding.title.getText()));
+        binding.btnSend.setText(getString(R.string.create_title));
 
         if (name != null){
             binding.nameInput.setText(name);

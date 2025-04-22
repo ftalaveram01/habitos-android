@@ -12,4 +12,8 @@
     <string name="days">Days</string>
     <string name="created">Habit created</string>
     <string name="updated">Habit updated</string>
+    <string name="create_title">CREATE</string>
+    <string name="create_title_right_space">CREATE %s</string>
+    <string name="update_title">UPDATE</string>
+    <string name="update_title_right_space">UPDATE %s</string>
 </resources>
