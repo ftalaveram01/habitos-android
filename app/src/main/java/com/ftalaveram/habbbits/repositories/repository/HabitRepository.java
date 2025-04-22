@@ -4,6 +4,8 @@ import com.ftalaveram.habbbits.repositories.api.RemoteDataSource;
 import com.ftalaveram.habbbits.repositories.models.CreateRequest;
 import com.ftalaveram.habbbits.repositories.models.CreateResponse;
 import com.ftalaveram.habbbits.repositories.models.Habit;
+import com.ftalaveram.habbbits.repositories.models.UpdateRequest;
+import com.ftalaveram.habbbits.repositories.models.UpdateResponse;
 import com.ftalaveram.habbbits.repositories.models.UserHabit;
 
 import java.util.List;
@@ -28,5 +30,9 @@ public class HabitRepository {
 
     public void createHabit(String token, CreateRequest request, Callback<CreateResponse> callback){
         remoteDataSource.createHabit(token, request, callback);
+    }
+
+    public void updateHabit(String token, UpdateRequest request, Long id, Callback<UpdateResponse> callback){
+        remoteDataSource.updateHabit(token, request, id, callback);
     }
 }

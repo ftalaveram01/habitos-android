@@ -10,6 +10,8 @@ import com.ftalaveram.habbbits.repositories.models.LoginRequest;
 import com.ftalaveram.habbbits.repositories.models.ProfileResponse;
 import com.ftalaveram.habbbits.repositories.models.RegisterRequest;
 import com.ftalaveram.habbbits.repositories.models.RegisterResponse;
+import com.ftalaveram.habbbits.repositories.models.UpdateRequest;
+import com.ftalaveram.habbbits.repositories.models.UpdateResponse;
 import com.ftalaveram.habbbits.repositories.models.UserHabit;
 import com.ftalaveram.habbbits.repositories.models.VerifyAccess;
 
@@ -67,6 +69,11 @@ public class RemoteDataSource {
 
     public void createHabit(String token, CreateRequest request, final Callback<CreateResponse> callback){
         Call<CreateResponse> call = apiService.createHabit(token, request);
+        call.enqueue(callback);
+    }
+
+    public void updateHabit(String token, UpdateRequest request, Long id, final Callback<UpdateResponse> callback){
+        Call<UpdateResponse> call = apiService.updateHabit(token, request, id);
         call.enqueue(callback);
     }
 
