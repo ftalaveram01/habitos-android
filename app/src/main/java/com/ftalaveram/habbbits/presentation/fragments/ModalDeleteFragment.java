@@ -12,20 +12,28 @@ import android.view.Window;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.ftalaveram.habbbits.R;
+import com.ftalaveram.habbbits.presentation.viewmodels.DeleteDialogViewModel;
 
 public class ModalDeleteFragment extends DialogFragment {
+
+    private DeleteDialogViewModel deleteDialogViewModel;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Inflar el layout del modal
+        deleteDialogViewModel = new ViewModelProvider(this).get(DeleteDialogViewModel.class);
+
         View view = inflater.inflate(R.layout.modal_delete, container, true);
 
-        // Configurar elementos del modal (ejemplo: botón de cerrar)
-        view.findViewById(R.id.btnCloseModal).setOnClickListener(v -> {
+        view.findViewById(R.id.btn_close_modal).setOnClickListener(v -> {
             dismiss();
+        });
+
+        view.findViewById(R.id.btn_delete).setOnClickListener(v -> {
+            //deleteDialogViewModel.deleteHabit();
         });
 
         return view;
