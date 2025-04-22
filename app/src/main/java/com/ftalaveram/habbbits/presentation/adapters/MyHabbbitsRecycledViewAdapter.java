@@ -72,7 +72,6 @@ public class MyHabbbitsRecycledViewAdapter extends RecyclerView.Adapter<MyHabbbi
 
             holder.getBinding().timeLeft.setText("Days: " + dias + ", Hours: " + horas);
         }
-        //TODO: poner las resta de las fechas
 
         holder.getBinding().btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
