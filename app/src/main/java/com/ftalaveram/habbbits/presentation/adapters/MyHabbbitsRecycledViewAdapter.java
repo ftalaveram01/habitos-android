@@ -65,8 +65,6 @@ public class MyHabbbitsRecycledViewAdapter extends RecyclerView.Adapter<MyHabbbi
         holder.getBinding().title.setText(userHabit.getNombre());
         holder.getBinding().description.setText(userHabit.getDescripcion());
 
-        Log.d("FECHA DE MY HABBBIT", userHabit.getFechaNuevaActualizacion().toString());
-
         Long diferenciaMs = userHabit.getFechaNuevaActualizacion().getTime() - new Date().getTime();
 
         if (diferenciaMs <= 0){
@@ -110,17 +108,14 @@ public class MyHabbbitsRecycledViewAdapter extends RecyclerView.Adapter<MyHabbbi
             }
         });
 
-        holder.getBinding().btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ModalDeleteFragment modal = new ModalDeleteFragment();
+        holder.getBinding().btnDelete.setOnClickListener(v -> {
+            ModalDeleteFragment modal = new ModalDeleteFragment();
 
-                Bundle args = new Bundle();
-                args.putLong("id", userHabit.getId());
-                modal.setArguments(args);
+            Bundle args = new Bundle();
+            args.putLong("id", userHabit.getId());
+            modal.setArguments(args);
 
-                modal.show(fragmentManager, "ModalDelete");
-            }
+            modal.show(fragmentManager, "ModalDelete");
         });
     }
 

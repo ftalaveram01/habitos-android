@@ -4,13 +4,16 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -51,7 +54,8 @@ public class MyHabitsFragment extends Fragment {
         binding.recyclerViewMyHabbbits.setAdapter(recycledViewAdapter);
 
         // Observar cambios en los datos
-        myHabitsViewModel.getHabits().observe(getViewLifecycleOwner(), habits -> {
+        myHabitsViewModel.habitsLiveData.observe(getViewLifecycleOwner(), habits -> {
+            Log.e("RECARGANDO...", "");
             recycledViewAdapter.setMyHabbbits(habits);
             recycledViewAdapter.notifyDataSetChanged();
 
@@ -60,6 +64,19 @@ public class MyHabitsFragment extends Fragment {
             }else{
                 binding.textoVacioMyHabbbits.setVisibility(VISIBLE);
             }
+        });
+
+        myHabitsViewModel.deleteLiveData.observe(getViewLifecycleOwner(), success -> {
+            Log.e("VALOR DE SUCCESS", success.toString());
+            if (success != null) {
+                if (success) {
+                    Toast.makeText(requireContext(), "HABIT DELETED", Toast.LENGTH_SHORT).show();
+                    Log.d("DEBUG EN FRAGMENT", "SE HA LLEGADO A DESPUES DEL RECHARGE");
+                } else {
+                    Toast.makeText(requireContext(), "FAIL DELETING", Toast.LENGTH_SHORT).show();
+                }
+            }
+            myHabitsViewModel.rechargeHabits();
         });
 
         if(recycledViewAdapter.getItemCount() > 0){

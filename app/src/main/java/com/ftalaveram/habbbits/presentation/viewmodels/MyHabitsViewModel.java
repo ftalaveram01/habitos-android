@@ -19,6 +19,7 @@ import com.ftalaveram.habbbits.session.SessionManager;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,8 +31,11 @@ public class MyHabitsViewModel extends AndroidViewModel {
     RemoteDataSource remoteDataSource = new RemoteDataSource(apiService);
     HabitRepository repository = new HabitRepository(remoteDataSource);
     private SessionManager sessionManager;
+    private Long habitId;
 
-    private final MutableLiveData<List<UserHabit>> habitsLiveData = new MutableLiveData<>();
+    public final MutableLiveData<Boolean> deleteLiveData = new MutableLiveData<>();
+
+    public final MutableLiveData<List<UserHabit>> habitsLiveData = new MutableLiveData<>();
 
     public MyHabitsViewModel(@NonNull Application application) {
         super(application);
@@ -48,7 +52,9 @@ public class MyHabitsViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<List<UserHabit>> call, Response<List<UserHabit>> response) {
                 if (response.body() != null && response.isSuccessful()){
+                    Log.e("DEBUG DE LOADHABITS EN VIEWMODEL", "HA LLEGADO A HACER POST CON LISTA");
                     habitsLiveData.postValue(response.body());
+                    Log.e("DEBUG DE LOADHABITS EN VIEWMODEL", response.body().toString());
                 }
                 else{
                     habitsLiveData.postValue(new ArrayList<>());
@@ -67,12 +73,31 @@ public class MyHabitsViewModel extends AndroidViewModel {
         loadHabits();
     }
 
-    public void addHabit(UserHabit habit) {
-        List<UserHabit> currentHabits = habitsLiveData.getValue();
-        if (currentHabits == null) {
-            currentHabits = new ArrayList<>();
-        }
-        currentHabits.add(habit);
-        habitsLiveData.postValue(currentHabits);
+    public void deleteHabit(Long id){
+        repository.deleteHabit("Bearer " + sessionManager.getToken(), id, new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()){
+                    deleteLiveData.postValue(true);
+                    rechargeHabits();
+                    Log.e("DEBUG DE DELETEHABIT EN VIEWMODEL", "HA LLEGADO A HACER POST CON TRUE");
+                }else{
+                    deleteLiveData.postValue(false);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public Long getHabitId() {
+        return habitId;
+    }
+
+    public void setHabitId(Long habitId) {
+        this.habitId = habitId;
     }
 }

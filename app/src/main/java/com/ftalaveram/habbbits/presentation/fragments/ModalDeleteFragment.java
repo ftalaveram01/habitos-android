@@ -8,23 +8,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.ftalaveram.habbbits.R;
-import com.ftalaveram.habbbits.presentation.viewmodels.DeleteDialogViewModel;
+import com.ftalaveram.habbbits.presentation.viewmodels.MyHabitsViewModel;
 
 public class ModalDeleteFragment extends DialogFragment {
 
-    private DeleteDialogViewModel deleteDialogViewModel;
+    private MyHabitsViewModel myHabitsViewModel;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        deleteDialogViewModel = new ViewModelProvider(this).get(DeleteDialogViewModel.class);
+        myHabitsViewModel = new ViewModelProvider(this).get(MyHabitsViewModel.class);
+        Bundle args = getArguments();
+
+        if (args != null){
+            myHabitsViewModel.setHabitId(args.getLong("id", -1));
+        }
 
         View view = inflater.inflate(R.layout.modal_delete, container, true);
 
@@ -32,8 +39,13 @@ public class ModalDeleteFragment extends DialogFragment {
             dismiss();
         });
 
-        view.findViewById(R.id.btn_delete).setOnClickListener(v -> {
-            //deleteDialogViewModel.deleteHabit();
+        view.findViewById(R.id.btn_confirm_delete).setOnClickListener(v -> {
+
+            if (myHabitsViewModel.getHabitId() != -1)
+                myHabitsViewModel.deleteHabit(myHabitsViewModel.getHabitId());
+
+            dismiss();
+
         });
 
         return view;
