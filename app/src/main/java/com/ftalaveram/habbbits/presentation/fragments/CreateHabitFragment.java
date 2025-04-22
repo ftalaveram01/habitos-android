@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -171,6 +173,7 @@ public class CreateHabitFragment extends Fragment {
                     @Override
                     public void onChanged(CreateResponse createResponse) {
                         Toast.makeText(getContext(), getContext().getString(R.string.created), Toast.LENGTH_SHORT).show();
+                        Navigation.findNavController(v).navigateUp();
                     }
                 });
             }
