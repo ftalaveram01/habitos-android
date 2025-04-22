@@ -75,4 +75,10 @@ public class MyHabitsFragment extends Fragment {
             }
         });
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        myHabitsViewModel.rechargeHabits();
+    }
 }

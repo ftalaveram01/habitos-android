@@ -63,6 +63,10 @@ public class MyHabitsViewModel extends AndroidViewModel {
 
     }
 
+    public void rechargeHabits(){
+        loadHabits();
+    }
+
     public void addHabit(UserHabit habit) {
         List<UserHabit> currentHabits = habitsLiveData.getValue();
         if (currentHabits == null) {
