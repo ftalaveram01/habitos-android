@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.util.Log;
@@ -20,15 +19,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ftalaveram.habbbits.R;
 import com.ftalaveram.habbbits.databinding.FragmentCreateHabitBinding;
-import com.ftalaveram.habbbits.databinding.FragmentMyHabitsBinding;
-import com.ftalaveram.habbbits.presentation.viewmodels.AchievementsViewModel;
 import com.ftalaveram.habbbits.presentation.viewmodels.CreateHabitsViewModel;
 import com.ftalaveram.habbbits.repositories.models.CreateResponse;
 import com.ftalaveram.habbbits.repositories.models.UpdateResponse;
@@ -45,7 +39,6 @@ public class CreateHabitFragment extends Fragment {
 
     private FragmentCreateHabitBinding binding;
     private CreateHabitsViewModel createHabitsViewModel;
-    private ArrayAdapter<String> spinnerAdapter;
     private String selected = "";
 
     private static final String IS_UPDATE = "isUpdate";
@@ -75,7 +68,7 @@ public class CreateHabitFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentCreateHabitBinding.inflate(inflater, container, false);
         
@@ -131,7 +124,7 @@ public class CreateHabitFragment extends Fragment {
                     createHabitsViewModel.updateLiveData.observe(getViewLifecycleOwner(), new Observer<UpdateResponse>() {
                         @Override
                         public void onChanged(UpdateResponse updateResponse) {
-                            Toast.makeText(getContext(), getContext().getString(R.string.updated), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), getString(R.string.updated), Toast.LENGTH_SHORT).show();
                             Navigation.findNavController(v).navigateUp();
                         }
                     });
@@ -205,6 +198,7 @@ public class CreateHabitFragment extends Fragment {
 
                     SimpleDateFormat formatoSalida = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
                     formatoSalida.setTimeZone(TimeZone.getTimeZone("UTC"));
+                    assert date != null;
                     fechaInicio = formatoSalida.format(date);
                 }
 
@@ -212,7 +206,7 @@ public class CreateHabitFragment extends Fragment {
 
                 if (validNumber()){
                     horasIntervalo = Integer.parseInt(String.valueOf(binding.numberFrequencyInput.getText()));
-                    if (String.valueOf(binding.frequencySpinner.getSelectedItem()).equals(getContext().getString(R.string.days))){
+                    if (String.valueOf(binding.frequencySpinner.getSelectedItem()).equals(getString(R.string.days))){
                         horasIntervalo *= 24;
                     }
                 }else{
@@ -227,7 +221,7 @@ public class CreateHabitFragment extends Fragment {
                     createHabitsViewModel.createLiveData.observe(getViewLifecycleOwner(), new Observer<CreateResponse>() {
                         @Override
                         public void onChanged(CreateResponse createResponse) {
-                            Toast.makeText(getContext(), getContext().getString(R.string.created), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), getString(R.string.created), Toast.LENGTH_SHORT).show();
                             Navigation.findNavController(v).navigateUp();
                         }
                     });
@@ -240,10 +234,10 @@ public class CreateHabitFragment extends Fragment {
 
     private void setupSpinner(){
 
-        spinnerAdapter = new ArrayAdapter<>(
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(
                 requireContext(),
                 R.layout.custom_spinner_item,
-                new String[]{getContext().getString(R.string.hours), getContext().getString(R.string.days)}
+                new String[]{getString(R.string.hours), getString(R.string.days)}
         );
 
         binding.frequencySpinner.setAdapter(spinnerAdapter);
@@ -298,18 +292,14 @@ public class CreateHabitFragment extends Fragment {
 
     private boolean validUpdate(String name, String description){
         if (name != null && description != null){
-            if (!name.isEmpty() && !description.isEmpty()){
-                return true;
-            }
+            return !name.isEmpty() && !description.isEmpty();
         }
         return false;
     }
 
     private boolean validCreate(String name, String description, String creadoEn, String fechaInicio, int horasIntervalo){
         if (name != null && description != null && creadoEn != null && fechaInicio != null){
-            if (!name.isEmpty() && !description.isEmpty() && !creadoEn.isEmpty() && !fechaInicio.isEmpty() && horasIntervalo > 0){
-                return true;
-            }
+            return !name.isEmpty() && !description.isEmpty() && !creadoEn.isEmpty() && !fechaInicio.isEmpty() && horasIntervalo > 0;
         }
         return false;
     }
