@@ -6,6 +6,9 @@ import com.ftalaveram.habbbits.repositories.models.LoginRequest;
 import com.ftalaveram.habbbits.repositories.models.ProfileResponse;
 import com.ftalaveram.habbbits.repositories.models.RegisterRequest;
 import com.ftalaveram.habbbits.repositories.models.RegisterResponse;
+import com.ftalaveram.habbbits.repositories.models.UpdatePasswordRequest;
+import com.ftalaveram.habbbits.repositories.models.UpdateProfileRequest;
+import com.ftalaveram.habbbits.repositories.models.UpdateResponse;
 import com.ftalaveram.habbbits.repositories.models.VerifyAccess;
 
 import retrofit2.Callback;
@@ -32,5 +35,13 @@ public class UserRepository {
 
     public void getProfileData(String token, Callback<ProfileResponse> callback){
         remoteDataSource.getProfileData(token, callback);
+    }
+
+    public void updateProfile(String token, UpdateProfileRequest request, Callback<UpdateResponse> callback){
+        remoteDataSource.updateProfile(token, request, callback);
+    }
+
+    public void updatePassword(String token, UpdatePasswordRequest request, Callback<UpdateResponse> callback){
+        remoteDataSource.updatePassword(token, request, callback);
     }
 }

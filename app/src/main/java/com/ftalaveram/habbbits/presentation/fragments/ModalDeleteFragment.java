@@ -23,21 +23,23 @@ public class ModalDeleteFragment extends DialogFragment {
 
     private MyHabitsViewModel myHabitsViewModel;
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         myHabitsViewModel = new ViewModelProvider(requireActivity()).get(MyHabitsViewModel.class);
         Bundle args = getArguments();
-
         if (args != null){
             myHabitsViewModel.setHabitId(args.getLong("id", -1));
         }
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.modal_delete, container, true);
 
-        view.findViewById(R.id.btn_close_modal).setOnClickListener(v -> {
-            dismiss();
-        });
+        view.findViewById(R.id.btn_close_modal).setOnClickListener(v -> dismiss());
 
         view.findViewById(R.id.btn_confirm_delete).setOnClickListener(v -> {
 

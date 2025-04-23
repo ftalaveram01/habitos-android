@@ -15,4 +15,11 @@ public class UpdateResponse {
     public void setSuccess(boolean success) {
         this.success = success;
     }
+
+    @Override
+    public String toString() {
+        return "UpdateResponse{" +
+                "success=" + success +
+                '}';
+    }
 }

@@ -21,4 +21,6 @@
     <string name="too_late">TOO LATE...</string>
     <string name="time_left">Days: %s, Hours: %s</string>
     <string name="update_profile_title">Update Profile</string>
+    <string name="empty" />
+    <string name="must_be_same">MUST BE THE SAME</string>
 </resources>

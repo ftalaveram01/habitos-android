@@ -10,6 +10,8 @@ import com.ftalaveram.habbbits.repositories.models.LoginRequest;
 import com.ftalaveram.habbbits.repositories.models.ProfileResponse;
 import com.ftalaveram.habbbits.repositories.models.RegisterRequest;
 import com.ftalaveram.habbbits.repositories.models.RegisterResponse;
+import com.ftalaveram.habbbits.repositories.models.UpdatePasswordRequest;
+import com.ftalaveram.habbbits.repositories.models.UpdateProfileRequest;
 import com.ftalaveram.habbbits.repositories.models.UpdateRequest;
 import com.ftalaveram.habbbits.repositories.models.UpdateResponse;
 import com.ftalaveram.habbbits.repositories.models.UserHabit;
@@ -53,6 +55,16 @@ public class RemoteDataSource {
         call.enqueue(callback);
     }
 
+    public void updateProfile(String token, UpdateProfileRequest request, final Callback<UpdateResponse> callback){
+        Call<UpdateResponse> call = apiService.updateProfile(token, request);
+        call.enqueue(callback);
+    }
+
+    public void updatePassword(String token, UpdatePasswordRequest request, final Callback<UpdateResponse> callback){
+        Call<UpdateResponse> call = apiService.updatePassword(token, request);
+        call.enqueue(callback);
+    }
+
     //-------------------------------------------------------------------------------------------------
     //-----------------------------------HABIT METHODS-------------------------------------------------
     //-------------------------------------------------------------------------------------------------
@@ -83,7 +95,7 @@ public class RemoteDataSource {
     }
 
     //-------------------------------------------------------------------------------------------------
-    //-----------------------------------ACHIEVEMENTS METHODS-------------------------------------------------
+    //-----------------------------------ACHIEVEMENTS METHODS------------------------------------------
     //-------------------------------------------------------------------------------------------------
 
     public void getAchievements(String token, final Callback<List<Achievements>> callback){
