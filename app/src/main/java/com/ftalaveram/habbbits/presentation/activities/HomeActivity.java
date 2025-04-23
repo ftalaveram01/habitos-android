@@ -61,8 +61,14 @@ public class HomeActivity extends AppCompatActivity {
                 toolbarTitle.setText(R.string.achievements);
             } else if (id == R.id.profileFragment) {
                 toolbarTitle.setText(R.string.profile);
+                binding.bottomNavView.setVisibility(VISIBLE);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             } else if (id == R.id.createHabitFragment){
                 toolbarTitle.setText(R.string.create);
+                binding.bottomNavView.setVisibility(GONE);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            } else if (id == R.id.updateProfileFragment){
+                toolbarTitle.setText(R.string.update_profile_title);
                 binding.bottomNavView.setVisibility(GONE);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             }

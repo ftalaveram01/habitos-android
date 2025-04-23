@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.ftalaveram.habbbits.R;
 import com.ftalaveram.habbbits.databinding.FragmentProfileBinding;
 import com.ftalaveram.habbbits.presentation.viewmodels.ProfileViewModel;
 import com.ftalaveram.habbbits.repositories.models.ProfileResponse;
+
+import java.util.Objects;
 
 public class ProfileFragment extends Fragment {
 
@@ -29,7 +32,7 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
 
@@ -48,5 +51,15 @@ public class ProfileFragment extends Fragment {
                 binding.numberHabits.setText(String.valueOf(profileResponse.getHabitsNumber()));
             }
         });
+
+        binding.btnUpdateProfile.setOnClickListener(v -> {
+            Navigation.findNavController(ProfileFragment.this.requireView()).navigate(R.id.action_profileFragment_to_updateProfileFragment);
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        profileViewModel.rechargeProfileData();
     }
 }

@@ -52,4 +52,8 @@ public class ProfileViewModel extends AndroidViewModel {
             }
         });
     }
+
+    public void rechargeProfileData(){
+        loadProfileData();
+    }
 }

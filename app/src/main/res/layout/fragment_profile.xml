@@ -111,6 +111,7 @@
             android:paddingEnd="5dp"
             />
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_update_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="UPDATE"
