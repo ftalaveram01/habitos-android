@@ -56,7 +56,6 @@ public class AchievementsViewModel extends AndroidViewModel {
                 if (response.body() != null && response.isSuccessful()){
                     completeAchievements = response.body();
                     achievementsLiveData.postValue(response.body());
-                    Log.d("LLAMADA A API", "SE HA LLAMADOA  LA API PARA OBTENER LOS LOGROS");
                 }
                 else{
                     achievementsLiveData.postValue(new ArrayList<>());

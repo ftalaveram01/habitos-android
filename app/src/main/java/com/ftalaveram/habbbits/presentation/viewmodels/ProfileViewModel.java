@@ -40,6 +40,10 @@ public class ProfileViewModel extends AndroidViewModel {
         loadProfileData();
     }
 
+    public void logOut(){
+        sessionManager.logout();
+    }
+
     private void loadProfileData(){
         repository.getProfileData("Bearer " + sessionManager.getToken(), new Callback<ProfileResponse>() {
             @Override

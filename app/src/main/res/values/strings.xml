@@ -23,4 +23,8 @@
     <string name="update_profile_title">Update Profile</string>
     <string name="empty" />
     <string name="must_be_same">MUST BE THE SAME</string>
+    <string name="log_out">Log out</string>
+    <string name="sure_log_out">Are you sure you want to log out?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

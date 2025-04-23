@@ -1,9 +1,11 @@
 package com.ftalaveram.habbbits.presentation.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -15,6 +17,9 @@ import android.view.ViewGroup;
 
 import com.ftalaveram.habbbits.R;
 import com.ftalaveram.habbbits.databinding.FragmentProfileBinding;
+import com.ftalaveram.habbbits.presentation.activities.AuthActivity;
+import com.ftalaveram.habbbits.presentation.activities.HomeActivity;
+import com.ftalaveram.habbbits.presentation.activities.MainActivity;
 import com.ftalaveram.habbbits.presentation.viewmodels.ProfileViewModel;
 import com.ftalaveram.habbbits.repositories.models.ProfileResponse;
 
@@ -54,6 +59,22 @@ public class ProfileFragment extends Fragment {
 
         binding.btnUpdateProfile.setOnClickListener(v -> {
             Navigation.findNavController(ProfileFragment.this.requireView()).navigate(R.id.action_profileFragment_to_updateProfileFragment);
+        });
+
+        binding.btnLogOut.setOnClickListener(v -> {
+            new AlertDialog.Builder(requireContext())
+                    .setTitle(getString(R.string.log_out))
+                    .setMessage(getString(R.string.sure_log_out))
+                    .setPositiveButton(getString(R.string.yes), (dialog, which) -> {
+                        profileViewModel.logOut();
+
+                        Intent intent = new Intent(requireActivity(), AuthActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        requireActivity().finish();
+                    })
+                    .setNegativeButton(getString(R.string.no), null)
+                    .show();
         });
     }
 

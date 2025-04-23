@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/backgroundGeneral"
     tools:context=".presentation.fragments.ProfileFragment">
 
@@ -122,6 +123,22 @@
             android:layout_marginTop="20dp"
             android:backgroundTint="@color/purple"
             android:textColor="@color/white"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/black"
+            />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_log_out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LOG OUT"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:paddingHorizontal="60dp"
+            android:paddingVertical="16dp"
+            android:backgroundTint="@color/orange"
+            android:textColor="@color/white"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/black"
             />
     </LinearLayout>
 
