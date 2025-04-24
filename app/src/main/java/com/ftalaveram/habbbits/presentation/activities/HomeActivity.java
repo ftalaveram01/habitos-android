@@ -4,11 +4,21 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewConfiguration;
+import android.view.ViewGroup;
+import android.view.WindowInsets;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -17,6 +27,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.ftalaveram.habbbits.R;
 import com.ftalaveram.habbbits.databinding.ActivityHomeBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Objects;
 
@@ -73,6 +84,10 @@ public class HomeActivity extends AppCompatActivity {
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             }
         });
+
+        // En tu Activity:
+        setupNavigationDetection(this, binding.bottomNavView);
+
     }
 
     @Override
@@ -81,5 +96,17 @@ public class HomeActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, new AppBarConfiguration.Builder(
                 R.id.myHabitsFragment, R.id.recommendedFragment, R.id.achievementsFragment, R.id.profileFragment
         ).build()) || super.onSupportNavigateUp();
+    }
+
+    private void setupNavigationDetection(Activity activity, BottomNavigationView bottomNav) {
+        ViewCompat.setOnApplyWindowInsetsListener(bottomNav, (v, insets) -> {
+            Insets gestureInsets = insets.getInsets(WindowInsetsCompat.Type.systemGestures());
+
+            if (gestureInsets.bottom > 0) {
+                bottomNav.setBackgroundResource(R.drawable.bottom_personalizado);
+            }
+
+            return insets;
+        });
     }
 }

@@ -6,6 +6,7 @@
 
     <style name="Theme.Habbbits" parent="Base.Theme.Habbbits">
         <item name="android:statusBarColor">@color/backgroundGeneral</item>
+        <item name="android:navigationBarColor">@color/brown</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowTranslucentStatus">false</item>
