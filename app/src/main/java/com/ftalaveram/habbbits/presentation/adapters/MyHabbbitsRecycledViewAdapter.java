@@ -1,15 +1,23 @@
 package com.ftalaveram.habbbits.presentation.adapters;
 
 import android.app.Application;
+import android.app.Dialog;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,7 +36,6 @@ import com.ftalaveram.habbbits.session.SessionManager;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -84,7 +91,7 @@ public class MyHabbbitsRecycledViewAdapter extends RecyclerView.Adapter<MyHabbbi
                     @Override
                     public void onResponse(Call<DoneResponse> call, Response<DoneResponse> response) {
                         if (response.body() != null && response.isSuccessful()){
-                            Toast.makeText(v.getContext(), "HABIT DONE", Toast.LENGTH_LONG).show();
+                            mostrarDialogCompleto(userHabit.getNombre(), v);
                         }
                     }
 
@@ -128,5 +135,32 @@ public class MyHabbbitsRecycledViewAdapter extends RecyclerView.Adapter<MyHabbbi
     public void setMyHabbbits(List<UserHabit> myHabbbits) {
         this.myHabbbits = myHabbbits;
         notifyDataSetChanged();
+    }
+
+    private void mostrarDialogCompleto(String nombreHabito, View view) {
+        Context context = view.getContext();
+
+        Dialog dialog = new Dialog(context, R.style.DialogNoTitle);
+        dialog.setContentView(R.layout.dialog_habito_completado);
+
+        TextView tvTitulo = dialog.findViewById(R.id.tvTitulo);
+        ImageView ivIcono = dialog.findViewById(R.id.ivIcono);
+        Button btnAceptar = dialog.findViewById(R.id.btnAceptar);
+
+        String mensaje = String.format("¡%s completado!", nombreHabito);
+        tvTitulo.setText(mensaje);
+
+        Animation anim = AnimationUtils.loadAnimation(context, R.anim.bounce);
+        ivIcono.startAnimation(anim);
+
+        btnAceptar.setOnClickListener(v -> dialog.dismiss());
+
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        }
+
+        dialog.show();
     }
 }
