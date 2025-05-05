@@ -1,6 +1,11 @@
 package com.ftalaveram.habbbits.presentation.fragments;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +19,13 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.ftalaveram.habbbits.R;
 import com.ftalaveram.habbbits.databinding.FragmentProfileBinding;
@@ -61,21 +73,52 @@ public class ProfileFragment extends Fragment {
             Navigation.findNavController(ProfileFragment.this.requireView()).navigate(R.id.action_profileFragment_to_updateProfileFragment);
         });
 
-        binding.btnLogOut.setOnClickListener(v -> {
-            new AlertDialog.Builder(requireContext())
-                    .setTitle(getString(R.string.log_out))
-                    .setMessage(getString(R.string.sure_log_out))
-                    .setPositiveButton(getString(R.string.yes), (dialog, which) -> {
-                        profileViewModel.logOut();
+        binding.btnLogOut.setOnClickListener(this::mostrarDialogLogout);
+    }
 
-                        Intent intent = new Intent(requireActivity(), AuthActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        requireActivity().finish();
-                    })
-                    .setNegativeButton(getString(R.string.no), null)
-                    .show();
+    private void mostrarDialogLogout(View view) {
+        Context context = view.getContext();
+
+        Dialog dialog = new Dialog(context, R.style.DialogNoTitle);
+        dialog.setContentView(R.layout.dialog_logout);
+
+        TextView tvTitulo = dialog.findViewById(R.id.tvTitulo);
+        TextView tvMensaje = dialog.findViewById(R.id.tvMensaje);
+        ImageView ivIcono = dialog.findViewById(R.id.ivIcono);
+        Button btnConfirmar = dialog.findViewById(R.id.btnConfirmar);
+        Button btnCancelar = dialog.findViewById(R.id.btnCancelar);
+
+        // Configurar textos
+        tvTitulo.setText(R.string.log_out);
+        tvMensaje.setText(R.string.sure_log_out);
+        ivIcono.setImageResource(R.drawable.salir);
+        btnConfirmar.setText(R.string.yes);
+        btnCancelar.setText(R.string.no);
+
+        // Configurar animación (opcional)
+        Animation anim = AnimationUtils.loadAnimation(context, R.anim.bounce);
+        ivIcono.startAnimation(anim);
+
+        // Configurar botones
+        btnConfirmar.setOnClickListener(v -> {
+            profileViewModel.logOut();
+            Intent intent = new Intent(context, AuthActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+            requireActivity().finish();
+            dialog.dismiss();
         });
+
+        btnCancelar.setOnClickListener(v -> dialog.dismiss());
+
+        // Configurar ventana
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        }
+
+        dialog.show();
     }
 
     @Override
