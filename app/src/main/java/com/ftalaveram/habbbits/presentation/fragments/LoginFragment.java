@@ -14,11 +14,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ftalaveram.habbbits.R;
 import com.ftalaveram.habbbits.databinding.FragmentLoginBinding;
 import com.ftalaveram.habbbits.presentation.activities.HomeActivity;
 import com.ftalaveram.habbbits.presentation.viewmodels.LoginViewModel;
 import com.ftalaveram.habbbits.repositories.models.LoginData;
+
+import java.util.Objects;
 
 public class LoginFragment extends Fragment {
 
@@ -32,7 +33,7 @@ public class LoginFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentLoginBinding.inflate(inflater, container, false);
 
@@ -46,7 +47,7 @@ public class LoginFragment extends Fragment {
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginViewModel.login(binding.usernameInput.getText().toString(), binding.passwordInput.getText().toString());
+                loginViewModel.login(Objects.requireNonNull(binding.usernameInput.getText()).toString(), Objects.requireNonNull(binding.passwordInput.getText()).toString());
             }
         });
 

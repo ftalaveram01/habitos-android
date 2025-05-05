@@ -2,10 +2,8 @@ package com.ftalaveram.habbbits.session;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.security.keystore.KeyGenParameterSpec;
 import androidx.security.crypto.EncryptedSharedPreferences;
 import androidx.security.crypto.MasterKey;
-import androidx.security.crypto.MasterKeys;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
@@ -17,12 +15,10 @@ public class SessionManager {
 
     public SessionManager(Context context) {
         try {
-            // 1. Configuración de la clave maestra (sin usar MasterKeys)
             MasterKey masterKey = new MasterKey.Builder(context)
                     .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
                     .build();
 
-            // 2. Crear EncryptedSharedPreferences
             sharedPreferences = EncryptedSharedPreferences.create(
                     context,
                     PREFS_NAME,

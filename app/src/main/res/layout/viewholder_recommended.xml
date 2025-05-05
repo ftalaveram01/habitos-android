@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:backgroundTint="@color/lightGreen"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textStyle="bold"
             android:textColor="@color/black"
             />
@@ -51,7 +51,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/softGreen"
-                android:text="USE"
+                android:text="@string/use"
                 android:textSize="24sp"
                 app:strokeWidth="1dp"
                 app:cornerRadius="10dp"

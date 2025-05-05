@@ -73,7 +73,7 @@ public class MyHabbbitsRecycledViewAdapter extends RecyclerView.Adapter<MyHabbbi
         holder.getBinding().title.setText(userHabit.getNombre());
         holder.getBinding().description.setText(userHabit.getDescripcion());
 
-        Long diferenciaMs = userHabit.getFechaNuevaActualizacion().getTime() - new Date().getTime();
+        long diferenciaMs = userHabit.getFechaNuevaActualizacion().getTime() - new Date().getTime();
 
         if (diferenciaMs <= 0){
             holder.getBinding().timeLeft.setText(R.string.too_late);
@@ -89,14 +89,14 @@ public class MyHabbbitsRecycledViewAdapter extends RecyclerView.Adapter<MyHabbbi
             public void onClick(View v) {
                 repository.habitDone("Bearer " + sessionManager.getToken(), userHabit.getId(), new Callback<DoneResponse>() {
                     @Override
-                    public void onResponse(Call<DoneResponse> call, Response<DoneResponse> response) {
+                    public void onResponse(@NonNull Call<DoneResponse> call, @NonNull Response<DoneResponse> response) {
                         if (response.body() != null && response.isSuccessful()){
                             mostrarDialogCompleto(userHabit.getNombre(), v);
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<DoneResponse> call, Throwable t) {
+                    public void onFailure(@NonNull Call<DoneResponse> call, @NonNull Throwable t) {
 
                     }
                 });

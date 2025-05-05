@@ -1,14 +1,11 @@
 package com.ftalaveram.habbbits.presentation.viewmodels;
 
 import android.app.Application;
-import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.ftalaveram.habbbits.presentation.fragments.ModalChangePasswordFragment;
 import com.ftalaveram.habbbits.repositories.api.ApiClient;
 import com.ftalaveram.habbbits.repositories.api.ApiService;
 import com.ftalaveram.habbbits.repositories.api.RemoteDataSource;
@@ -84,7 +81,7 @@ public class ProfileViewModel extends AndroidViewModel {
     public void updatePassword(String newPassword, String password){
         repository.updatePassword("Bearer " + sessionManager.getToken(), new UpdatePasswordRequest(newPassword, password), new Callback<UpdateResponse>() {
             @Override
-            public void onResponse(Call<UpdateResponse> call, Response<UpdateResponse> response) {
+            public void onResponse(@NonNull Call<UpdateResponse> call, @NonNull Response<UpdateResponse> response) {
                 if (response.isSuccessful() && response.body() != null){
                     updatePasswordLiveData.postValue(response.body());
                 }else{
@@ -93,7 +90,7 @@ public class ProfileViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void onFailure(Call<UpdateResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<UpdateResponse> call, @NonNull Throwable t) {
                 updatePasswordLiveData.postValue(new UpdateResponse(false));
             }
         });

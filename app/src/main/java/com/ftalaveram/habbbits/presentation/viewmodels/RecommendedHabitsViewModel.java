@@ -28,7 +28,7 @@ public class RecommendedHabitsViewModel extends AndroidViewModel {
     HabitRepository repository = new HabitRepository(remoteDataSource);
     private SessionManager sessionManager;
 
-    private MutableLiveData<List<Habit>> habitsLiveData = new MutableLiveData<>();
+    private final MutableLiveData<List<Habit>> habitsLiveData = new MutableLiveData<>();
 
     public RecommendedHabitsViewModel(@NonNull Application application){
         super(application);
@@ -42,7 +42,7 @@ public class RecommendedHabitsViewModel extends AndroidViewModel {
     private void loadHabits(){
         repository.getRecommendedHabits(new Callback<List<Habit>>() {
             @Override
-            public void onResponse(Call<List<Habit>> call, Response<List<Habit>> response) {
+            public void onResponse(@NonNull Call<List<Habit>> call, @NonNull Response<List<Habit>> response) {
                 if (response.body() != null && response.isSuccessful()){
                     habitsLiveData.postValue(response.body());
                 }
@@ -52,7 +52,7 @@ public class RecommendedHabitsViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void onFailure(Call<List<Habit>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<Habit>> call, @NonNull Throwable t) {
                 habitsLiveData.postValue(new ArrayList<>());
             }
         });

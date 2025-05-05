@@ -9,16 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ftalaveram.habbbits.R;
 import com.ftalaveram.habbbits.databinding.FragmentRecommendedBinding;
-import com.ftalaveram.habbbits.presentation.adapters.MyHabbbitsRecycledViewAdapter;
 import com.ftalaveram.habbbits.presentation.adapters.RecommendedHabitsRecycledViewAdapter;
 import com.ftalaveram.habbbits.presentation.viewmodels.RecommendedHabitsViewModel;
 
@@ -37,7 +34,7 @@ public class RecommendedFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentRecommendedBinding.inflate(inflater, container, false);
 

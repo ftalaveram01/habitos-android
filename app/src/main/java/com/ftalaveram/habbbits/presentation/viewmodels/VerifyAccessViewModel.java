@@ -1,11 +1,9 @@
 package com.ftalaveram.habbbits.presentation.viewmodels;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.ftalaveram.habbbits.repositories.api.ApiClient;
@@ -25,7 +23,7 @@ public class VerifyAccessViewModel extends AndroidViewModel {
     RemoteDataSource remoteDataSource = new RemoteDataSource(apiService);
     UserRepository repository = new UserRepository(remoteDataSource);
 
-    private SessionManager sessionManager;
+    private final SessionManager sessionManager;
 
     public MutableLiveData<VerifyAccess> verifyAccess = new MutableLiveData<>();
 
@@ -37,7 +35,7 @@ public class VerifyAccessViewModel extends AndroidViewModel {
     public void verifyAccess() {
         repository.verifyAccess("Bearer " + sessionManager.getToken(), new Callback<VerifyAccess>() {
             @Override
-            public void onResponse(Call<VerifyAccess> call, Response<VerifyAccess> response) {
+            public void onResponse(@NonNull Call<VerifyAccess> call, @NonNull Response<VerifyAccess> response) {
                 if(response.isSuccessful() && response.body() != null){
                     verifyAccess.postValue(new VerifyAccess(response.body().isAuthenticated()));
                 }else{
@@ -46,13 +44,10 @@ public class VerifyAccessViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void onFailure(Call<VerifyAccess> call, Throwable t) {
+            public void onFailure(@NonNull Call<VerifyAccess> call, @NonNull Throwable t) {
                 verifyAccess.postValue(new VerifyAccess(false));
             }
         });
     }
 
-    public LiveData<VerifyAccess> getVerifyAccessResult() {
-        return verifyAccess;
-    }
 }

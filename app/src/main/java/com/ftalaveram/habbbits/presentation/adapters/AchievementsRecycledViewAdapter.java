@@ -1,6 +1,5 @@
 package com.ftalaveram.habbbits.presentation.adapters;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -9,11 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ftalaveram.habbbits.R;
 import com.ftalaveram.habbbits.databinding.ViewholderAchievementsBinding;
-import com.ftalaveram.habbbits.databinding.ViewholderHabitoBinding;
 import com.ftalaveram.habbbits.presentation.viewholders.AchievementsViewHolder;
-import com.ftalaveram.habbbits.presentation.viewholders.MyHabbbitsViewHolder;
 import com.ftalaveram.habbbits.repositories.models.Achievements;
-import com.ftalaveram.habbbits.repositories.models.UserHabit;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -43,7 +39,7 @@ public class AchievementsRecycledViewAdapter extends RecyclerView.Adapter<Achiev
         cal.setTime(fecha);
 
         int dia = cal.get(Calendar.DAY_OF_MONTH);
-        int mes = cal.get(Calendar.MONTH) + 1; // ¡Los meses van de 0 a 11!
+        int mes = cal.get(Calendar.MONTH) + 1;
         int anio = cal.get(Calendar.YEAR);
         int hora = cal.get(Calendar.HOUR_OF_DAY);
         int minuto = cal.get(Calendar.MINUTE);

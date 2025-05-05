@@ -17,7 +17,6 @@ import com.ftalaveram.habbbits.repositories.models.UpdateResponse;
 import com.ftalaveram.habbbits.repositories.models.UserHabit;
 import com.ftalaveram.habbbits.repositories.models.VerifyAccess;
 
-import java.net.CacheRequest;
 import java.util.List;
 
 import retrofit2.Call;

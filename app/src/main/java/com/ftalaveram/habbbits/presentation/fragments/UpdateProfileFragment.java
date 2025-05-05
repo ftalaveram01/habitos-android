@@ -13,7 +13,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +26,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ftalaveram.habbbits.R;
-import com.ftalaveram.habbbits.databinding.FragmentProfileBinding;
 import com.ftalaveram.habbbits.databinding.FragmentUpdateProfileBinding;
 import com.ftalaveram.habbbits.presentation.viewmodels.ProfileViewModel;
 import com.ftalaveram.habbbits.repositories.models.ProfileResponse;

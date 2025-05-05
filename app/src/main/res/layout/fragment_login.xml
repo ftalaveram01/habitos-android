@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:textSize="60sp"
         android:textStyle="bold"
-        android:text="HABBBITS"
+        android:text="@string/habbbits"
         android:textColor="@color/black"/>
 
     <TextView
@@ -24,7 +24,7 @@
         android:layout_marginTop="10dp"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:text="Email"
+        android:text="@string/email"
         android:textColor="@color/black"/>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -43,7 +43,7 @@
         app:boxCornerRadiusTopStart="10dp"
         app:hintTextColor="@color/black"
         app:cursorColor="@color/black"
-        android:hint="example@mail.com"
+        android:hint="@string/example_mail_com"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -63,7 +63,7 @@
         android:layout_marginTop="10dp"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:text="Password"
+        android:text="@string/password"
         android:textColor="@color/black"/>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -82,7 +82,7 @@
         app:boxCornerRadiusTopStart="10dp"
         app:hintTextColor="@color/black"
         app:cursorColor="@color/black"
-        android:hint="********"
+        android:hint="@string/oculted_password"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -106,7 +106,7 @@
         android:backgroundTint="@color/orange"
         app:strokeWidth="1dp"
         app:strokeColor="@color/black"
-        android:text="Login"
+        android:text="@string/login_not_capital_letters"
         android:textColor="@color/white"/>
 
 </LinearLayout>

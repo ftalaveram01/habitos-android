@@ -23,24 +23,17 @@ public class InicioFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_inicio, container, false);
 
-        return view;
+        return inflater.inflate(R.layout.fragment_inicio, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Botón para ir a Login
-        view.findViewById(R.id.btn_go_to_login).setOnClickListener(v -> {
-            Navigation.findNavController(v).navigate(R.id.action_inicioFragment_to_loginFragment);
-        });
+        view.findViewById(R.id.btn_go_to_login).setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_inicioFragment_to_loginFragment));
 
-        // Botón para ir a Register
-        view.findViewById(R.id.btn_go_to_register).setOnClickListener(v -> {
-            Navigation.findNavController(v).navigate(R.id.action_inicioFragment_to_registerFragment);
-        });
+        view.findViewById(R.id.btn_go_to_register).setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_inicioFragment_to_registerFragment));
 
     }
 }

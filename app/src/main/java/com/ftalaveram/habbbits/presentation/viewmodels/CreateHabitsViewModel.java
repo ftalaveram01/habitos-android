@@ -25,7 +25,7 @@ public class CreateHabitsViewModel extends AndroidViewModel {
     ApiService apiService = ApiClient.getApiService();
     RemoteDataSource remoteDataSource = new RemoteDataSource(apiService);
     HabitRepository repository = new HabitRepository(remoteDataSource);
-    private SessionManager sessionManager;
+    private final SessionManager sessionManager;
 
     public final MutableLiveData<CreateResponse> createLiveData = new MutableLiveData<>();
     public final MutableLiveData<UpdateResponse> updateLiveData = new MutableLiveData<>();
@@ -40,14 +40,14 @@ public class CreateHabitsViewModel extends AndroidViewModel {
 
         repository.createHabit("Bearer " + sessionManager.getToken(), request, new Callback<CreateResponse>() {
             @Override
-            public void onResponse(Call<CreateResponse> call, Response<CreateResponse> response) {
+            public void onResponse(@NonNull Call<CreateResponse> call, @NonNull Response<CreateResponse> response) {
                 if (response.isSuccessful() && response.body() != null){
                     createLiveData.postValue(response.body());
                 }
             }
 
             @Override
-            public void onFailure(Call<CreateResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<CreateResponse> call, @NonNull Throwable t) {
 
             }
         });
@@ -58,14 +58,14 @@ public class CreateHabitsViewModel extends AndroidViewModel {
 
         repository.updateHabit("Bearer " + sessionManager.getToken(), request, id, new Callback<UpdateResponse>() {
             @Override
-            public void onResponse(Call<UpdateResponse> call, Response<UpdateResponse> response) {
+            public void onResponse(@NonNull Call<UpdateResponse> call, @NonNull Response<UpdateResponse> response) {
                 if (response.isSuccessful() && response.body() != null){
                     updateLiveData.postValue(response.body());
                 }
             }
 
             @Override
-            public void onFailure(Call<UpdateResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<UpdateResponse> call, @NonNull Throwable t) {
 
             }
         });

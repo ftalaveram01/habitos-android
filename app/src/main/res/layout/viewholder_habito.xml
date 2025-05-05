@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:backgroundTint="@color/lightGreen"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textStyle="bold"
             android:textColor="@color/black"
             />
@@ -44,6 +44,7 @@
                 android:id="@+id/img_watch"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+                android:contentDescription="@string/clock"
                 android:src="@drawable/reloj"
                 />
 
@@ -68,7 +69,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="4"
                 android:backgroundTint="@color/softGreen"
-                android:text="DONE"
+                android:text="@string/done"
                 android:textSize="24sp"
                 app:icon="@drawable/comprobado"
                 app:iconGravity="textEnd"

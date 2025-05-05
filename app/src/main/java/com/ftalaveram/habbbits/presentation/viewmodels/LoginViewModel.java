@@ -1,12 +1,9 @@
 package com.ftalaveram.habbbits.presentation.viewmodels;
 
-import static androidx.core.content.ContentProviderCompat.requireContext;
-
 import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.ftalaveram.habbbits.repositories.api.ApiClient;
@@ -27,7 +24,7 @@ public class LoginViewModel extends AndroidViewModel {
     RemoteDataSource remoteDataSource = new RemoteDataSource(apiService);
     UserRepository repository = new UserRepository(remoteDataSource);
 
-    private SessionManager sessionManager;
+    private final SessionManager sessionManager;
 
     public MutableLiveData<LoginData> loginData = new MutableLiveData<>();
 
@@ -39,7 +36,7 @@ public class LoginViewModel extends AndroidViewModel {
     public void login(String email, String password) {
         repository.login(new LoginRequest(email, password), new Callback<LoginData>() {
             @Override
-            public void onResponse(Call<LoginData> call, Response<LoginData> response) {
+            public void onResponse(@NonNull Call<LoginData> call, @NonNull Response<LoginData> response) {
                 if (response.body() != null){
                     sessionManager.saveToken(response.body().getToken());
                     loginData.postValue(new LoginData(response.body().isSuccess(), null, response.body().getToken()));
@@ -50,13 +47,10 @@ public class LoginViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void onFailure(Call<LoginData> call, Throwable t) {
+            public void onFailure(@NonNull Call<LoginData> call, @NonNull Throwable t) {
                 loginData.postValue(new LoginData(false, null, null));
             }
         });
     }
 
-    public LiveData<LoginData> getLoginResult() {
-        return loginData;
-    }
 }

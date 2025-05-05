@@ -12,6 +12,7 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginBottom="16dp"
+        android:contentDescription="@string/done"
         android:src="@drawable/comprobado"/>
 
     <TextView
@@ -28,7 +29,7 @@
         android:id="@+id/btnAceptar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Aceptar"
+        android:text="@string/accept"
         android:backgroundTint="@color/brown"
         android:textColor="@color/white"
         android:paddingHorizontal="32dp"

@@ -1,11 +1,7 @@
 package com.ftalaveram.habbbits.presentation.viewholders;
 
-import android.view.View;
-
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ftalaveram.habbbits.databinding.ViewholderHabitoBinding;
 import com.ftalaveram.habbbits.databinding.ViewholderRecommendedBinding;
 
 public class RecommendedHabitsViewHolder extends RecyclerView.ViewHolder {

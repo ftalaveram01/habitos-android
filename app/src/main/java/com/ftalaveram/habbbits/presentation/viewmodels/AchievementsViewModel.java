@@ -1,7 +1,6 @@
 package com.ftalaveram.habbbits.presentation.viewmodels;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -13,7 +12,6 @@ import com.ftalaveram.habbbits.repositories.api.ApiClient;
 import com.ftalaveram.habbbits.repositories.api.ApiService;
 import com.ftalaveram.habbbits.repositories.api.RemoteDataSource;
 import com.ftalaveram.habbbits.repositories.models.Achievements;
-import com.ftalaveram.habbbits.repositories.models.UserHabit;
 import com.ftalaveram.habbbits.repositories.repository.AchievementsRepository;
 import com.ftalaveram.habbbits.session.SessionManager;
 
@@ -30,7 +28,7 @@ public class AchievementsViewModel extends AndroidViewModel {
     ApiService apiService = ApiClient.getApiService();
     RemoteDataSource remoteDataSource = new RemoteDataSource(apiService);
     AchievementsRepository repository = new AchievementsRepository(remoteDataSource);
-    private SessionManager sessionManager;
+    private final SessionManager sessionManager;
 
     private List<Achievements> completeAchievements = new ArrayList<>();
     private final MutableLiveData<List<Achievements>> achievementsLiveData = new MutableLiveData<>();
@@ -52,7 +50,7 @@ public class AchievementsViewModel extends AndroidViewModel {
     private void loadAchievements(){
         repository.getAchievements("Bearer " + sessionManager.getToken(), new Callback<List<Achievements>>() {
             @Override
-            public void onResponse(Call<List<Achievements>> call, Response<List<Achievements>> response) {
+            public void onResponse(@NonNull Call<List<Achievements>> call, @NonNull Response<List<Achievements>> response) {
                 if (response.body() != null && response.isSuccessful()){
                     completeAchievements = response.body();
                     achievementsLiveData.postValue(response.body());
@@ -63,7 +61,7 @@ public class AchievementsViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void onFailure(Call<List<Achievements>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<Achievements>> call, @NonNull Throwable t) {
                 achievementsLiveData.postValue(new ArrayList<>());
             }
         });
@@ -88,10 +86,8 @@ public class AchievementsViewModel extends AndroidViewModel {
             return completeAchievements;
         }
 
-        List<Achievements> filteredList = achievementsLiveData.getValue().stream()
+        return achievementsLiveData.getValue().stream()
                 .filter(a -> a.getNombre().equals(nombre))
                 .collect(Collectors.toList());
-
-        return filteredList;
     }
 }

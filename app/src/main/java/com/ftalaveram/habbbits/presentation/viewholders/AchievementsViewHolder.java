@@ -3,7 +3,6 @@ package com.ftalaveram.habbbits.presentation.viewholders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ftalaveram.habbbits.databinding.ViewholderAchievementsBinding;
-import com.ftalaveram.habbbits.databinding.ViewholderHabitoBinding;
 
 public class AchievementsViewHolder extends RecyclerView.ViewHolder {
 

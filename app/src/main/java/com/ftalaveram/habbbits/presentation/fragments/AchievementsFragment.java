@@ -25,6 +25,7 @@ import com.ftalaveram.habbbits.repositories.models.Achievements;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class AchievementsFragment extends Fragment {
@@ -33,8 +34,7 @@ public class AchievementsFragment extends Fragment {
     private AchievementsRecycledViewAdapter recycledViewAdapter;
     private AchievementsViewModel achievementsViewModel;
 
-    private ArrayAdapter<String> spinnerAdapter;
-    private List<String> uniqueNames = new ArrayList<>();
+    private final List<String> uniqueNames = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class AchievementsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentAchievementsBinding.inflate(inflater, container, false);
 
@@ -53,8 +53,6 @@ public class AchievementsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        int puntuacion = 0;
 
         recycledViewAdapter = new AchievementsRecycledViewAdapter();
         GridLayoutManager grid = new GridLayoutManager(getContext(), 1);
@@ -66,7 +64,7 @@ public class AchievementsFragment extends Fragment {
             recycledViewAdapter.setAchievements(achievements);
             recycledViewAdapter.notifyDataSetChanged();
             setupSpinner();
-            binding.puntuacionTotal.setText(getString(R.string.total_points) + String.valueOf(achievementsViewModel.getTotalPoints()));
+            binding.puntuacionTotal.setText(getString(R.string.total_points) + achievementsViewModel.getTotalPoints());
 
             if(recycledViewAdapter.getItemCount() > 0){
                 binding.textoVacioAchievements.setVisibility(GONE);
@@ -91,13 +89,13 @@ public class AchievementsFragment extends Fragment {
     private void setupSpinner(){
         uniqueNames.add(getString(R.string.all));
 
-        for (Achievements a : achievementsViewModel.getAchievements().getValue()){
+        for (Achievements a : Objects.requireNonNull(achievementsViewModel.getAchievements().getValue())){
             if (!uniqueNames.contains(a.getNombre())){
                 uniqueNames.add(a.getNombre());
             }
         }
 
-        spinnerAdapter = new ArrayAdapter<>(
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(
                 requireContext(),
                 android.R.layout.simple_spinner_item,
                 uniqueNames

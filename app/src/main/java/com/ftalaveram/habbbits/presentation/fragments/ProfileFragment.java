@@ -1,6 +1,5 @@
 package com.ftalaveram.habbbits.presentation.fragments;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +9,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -30,12 +28,8 @@ import android.widget.TextView;
 import com.ftalaveram.habbbits.R;
 import com.ftalaveram.habbbits.databinding.FragmentProfileBinding;
 import com.ftalaveram.habbbits.presentation.activities.AuthActivity;
-import com.ftalaveram.habbbits.presentation.activities.HomeActivity;
-import com.ftalaveram.habbbits.presentation.activities.MainActivity;
 import com.ftalaveram.habbbits.presentation.viewmodels.ProfileViewModel;
 import com.ftalaveram.habbbits.repositories.models.ProfileResponse;
-
-import java.util.Objects;
 
 public class ProfileFragment extends Fragment {
 
