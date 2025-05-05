@@ -88,18 +88,15 @@ public class ProfileFragment extends Fragment {
         Button btnConfirmar = dialog.findViewById(R.id.btnConfirmar);
         Button btnCancelar = dialog.findViewById(R.id.btnCancelar);
 
-        // Configurar textos
         tvTitulo.setText(R.string.log_out);
         tvMensaje.setText(R.string.sure_log_out);
         ivIcono.setImageResource(R.drawable.salir);
         btnConfirmar.setText(R.string.yes);
         btnCancelar.setText(R.string.no);
 
-        // Configurar animación (opcional)
         Animation anim = AnimationUtils.loadAnimation(context, R.anim.bounce);
         ivIcono.startAnimation(anim);
 
-        // Configurar botones
         btnConfirmar.setOnClickListener(v -> {
             profileViewModel.logOut();
             Intent intent = new Intent(context, AuthActivity.class);
@@ -111,7 +108,6 @@ public class ProfileFragment extends Fragment {
 
         btnCancelar.setOnClickListener(v -> dialog.dismiss());
 
-        // Configurar ventana
         Window window = dialog.getWindow();
         if (window != null) {
             window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
