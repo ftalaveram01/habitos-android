@@ -1,6 +1,7 @@
 package com.ftalaveram.habbbits.presentation.fragments;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -11,7 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -54,20 +61,20 @@ public class ModalChangePasswordFragment extends DialogFragment {
 
         view.findViewById(R.id.btn_confirm_update).setOnClickListener(v -> {
             if (validPassword() && validNewPassword() && validConfirmPassword() && validPasswordMatch()){
-                Snackbar.make(requireView(), "TRYING TO CHANGE PASSWORD...", 600).show();
+                Snackbar.make(requireView(), getString(R.string.tryingToChangePassword), 600).show();
                 profileViewModel.updatePassword(newPasswordEditText.getText().toString(), passwordEditText.getText().toString());
 
                 new Handler(Looper.getMainLooper()).postDelayed(() -> {
                     profileViewModel.updatePasswordLiveData.observe(getViewLifecycleOwner(), updateResponse -> {
                         if (updateResponse != null) {
                             if (updateResponse.isSuccess()) {
-                                Toast.makeText(requireContext(), "Password changed", Toast.LENGTH_SHORT).show();
+                                mostrarDialogCompleto(getString(R.string.passwordUpdated), v);
                                 dismiss();
                             } else {
                                 passwordEditText.setText(getString(R.string.empty));
                                 newPasswordEditText.setText(getString(R.string.empty));
                                 confirmPasswordEditText.setText(getString(R.string.empty));
-                                Toast.makeText(requireContext(), "FAIL CHANGING PASSWORD", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(requireContext(), getString(R.string.failChangingPassword), Toast.LENGTH_SHORT).show();
                             }
                             profileViewModel.updatePasswordLiveData.removeObservers(getViewLifecycleOwner());
                         }
@@ -77,6 +84,32 @@ public class ModalChangePasswordFragment extends DialogFragment {
         });
 
         return view;
+    }
+
+    private void mostrarDialogCompleto(String mensaje, View view) {
+        Context context = view.getContext();
+
+        Dialog dialog = new Dialog(context, R.style.DialogNoTitle);
+        dialog.setContentView(R.layout.dialog_habito_completado);
+
+        TextView tvTitulo = dialog.findViewById(R.id.tvTitulo);
+        ImageView ivIcono = dialog.findViewById(R.id.ivIcono);
+        Button btnAceptar = dialog.findViewById(R.id.btnAceptar);
+
+        tvTitulo.setText(mensaje);
+
+        Animation anim = AnimationUtils.loadAnimation(context, R.anim.bounce);
+        ivIcono.startAnimation(anim);
+
+        btnAceptar.setOnClickListener(v -> dialog.dismiss());
+
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        }
+
+        dialog.show();
     }
 
     private boolean validPassword(){

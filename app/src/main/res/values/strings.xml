@@ -29,4 +29,7 @@
     <string name="no">No</string>
     <string name="deleted">Habit deleted</string>
     <string name="profileUpdated">Profile updated</string>
+    <string name="passwordUpdated">Password updated</string>
+    <string name="failChangingPassword">FAIL CHANGING PASSWORD</string>
+    <string name="tryingToChangePassword">TRYING TO CHANGE PASSWORD...</string>
 </resources>
