@@ -1,6 +1,7 @@
 package com.ftalaveram.habbbits.presentation.fragments;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -8,6 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -49,7 +56,7 @@ public class ModalDeleteFragment extends DialogFragment {
             myHabitsViewModel.deleteLiveData.observe(getViewLifecycleOwner(), success -> {
                 if (success != null) {
                     if (success) {
-                        Toast.makeText(requireContext(), "Hábito eliminado", Toast.LENGTH_SHORT).show();
+                        mostrarDialogCompleto(getString(R.string.deleted), v);
                     }
                     dismiss();
                     myHabitsViewModel.deleteLiveData.removeObservers(getViewLifecycleOwner());
@@ -82,5 +89,31 @@ public class ModalDeleteFragment extends DialogFragment {
         if (getDialog() != null && getDialog().getWindow() != null) {
             getDialog().getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         }
+    }
+
+    private void mostrarDialogCompleto(String mensaje, View view) {
+        Context context = view.getContext();
+
+        Dialog dialog = new Dialog(context, R.style.DialogNoTitle);
+        dialog.setContentView(R.layout.dialog_habito_completado);
+
+        TextView tvTitulo = dialog.findViewById(R.id.tvTitulo);
+        ImageView ivIcono = dialog.findViewById(R.id.ivIcono);
+        Button btnAceptar = dialog.findViewById(R.id.btnAceptar);
+
+        tvTitulo.setText(mensaje);
+
+        Animation anim = AnimationUtils.loadAnimation(context, R.anim.bounce);
+        ivIcono.startAnimation(anim);
+
+        btnAceptar.setOnClickListener(v -> dialog.dismiss());
+
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        }
+
+        dialog.show();
     }
 }

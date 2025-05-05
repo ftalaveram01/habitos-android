@@ -3,7 +3,11 @@ package com.ftalaveram.habbbits.presentation.fragments;
 import static android.view.View.GONE;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,8 +21,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ftalaveram.habbbits.R;
@@ -124,7 +135,7 @@ public class CreateHabitFragment extends Fragment {
                     createHabitsViewModel.updateLiveData.observe(getViewLifecycleOwner(), new Observer<UpdateResponse>() {
                         @Override
                         public void onChanged(UpdateResponse updateResponse) {
-                            Toast.makeText(getContext(), getString(R.string.updated), Toast.LENGTH_SHORT).show();
+                            mostrarDialogCompleto(getString(R.string.updated), v);
                             Navigation.findNavController(v).navigateUp();
                         }
                     });
@@ -221,7 +232,7 @@ public class CreateHabitFragment extends Fragment {
                     createHabitsViewModel.createLiveData.observe(getViewLifecycleOwner(), new Observer<CreateResponse>() {
                         @Override
                         public void onChanged(CreateResponse createResponse) {
-                            Toast.makeText(getContext(), getString(R.string.created), Toast.LENGTH_SHORT).show();
+                            mostrarDialogCompleto(getString(R.string.created), v);
                             Navigation.findNavController(v).navigateUp();
                         }
                     });
@@ -288,6 +299,32 @@ public class CreateHabitFragment extends Fragment {
 
         datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis());
         datePickerDialog.show();
+    }
+
+    private void mostrarDialogCompleto(String mensaje, View view) {
+        Context context = view.getContext();
+
+        Dialog dialog = new Dialog(context, R.style.DialogNoTitle);
+        dialog.setContentView(R.layout.dialog_habito_completado);
+
+        TextView tvTitulo = dialog.findViewById(R.id.tvTitulo);
+        ImageView ivIcono = dialog.findViewById(R.id.ivIcono);
+        Button btnAceptar = dialog.findViewById(R.id.btnAceptar);
+
+        tvTitulo.setText(mensaje);
+
+        Animation anim = AnimationUtils.loadAnimation(context, R.anim.bounce);
+        ivIcono.startAnimation(anim);
+
+        btnAceptar.setOnClickListener(v -> dialog.dismiss());
+
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        }
+
+        dialog.show();
     }
 
     private boolean validUpdate(String name, String description){

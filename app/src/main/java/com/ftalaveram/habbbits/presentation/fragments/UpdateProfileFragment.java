@@ -1,5 +1,9 @@
 package com.ftalaveram.habbbits.presentation.fragments;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +17,13 @@ import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ftalaveram.habbbits.R;
@@ -72,7 +83,7 @@ public class UpdateProfileFragment extends Fragment {
             public void onChanged(UpdateResponse updateResponse) {
                 if (updateResponse != null){
                     if (updateResponse.isSuccess()){
-                        Toast.makeText(requireContext(), "User data updated", Toast.LENGTH_LONG).show();
+                        mostrarDialogCompleto(getString(R.string.profileUpdated), view);
                         Navigation.findNavController(view).navigateUp();
                     }else{
                         Toast.makeText(requireContext(), "UPDATE FAILED", Toast.LENGTH_LONG).show();
@@ -93,6 +104,32 @@ public class UpdateProfileFragment extends Fragment {
                 modal.show(getChildFragmentManager(), "ModalChangePassword");
             }
         });
+    }
+
+    private void mostrarDialogCompleto(String mensaje, View view) {
+        Context context = view.getContext();
+
+        Dialog dialog = new Dialog(context, R.style.DialogNoTitle);
+        dialog.setContentView(R.layout.dialog_habito_completado);
+
+        TextView tvTitulo = dialog.findViewById(R.id.tvTitulo);
+        ImageView ivIcono = dialog.findViewById(R.id.ivIcono);
+        Button btnAceptar = dialog.findViewById(R.id.btnAceptar);
+
+        tvTitulo.setText(mensaje);
+
+        Animation anim = AnimationUtils.loadAnimation(context, R.anim.bounce);
+        ivIcono.startAnimation(anim);
+
+        btnAceptar.setOnClickListener(v -> dialog.dismiss());
+
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        }
+
+        dialog.show();
     }
 
     private boolean validEmail(){
