@@ -1,11 +1,13 @@
 package com.ftalaveram.habbbits.presentation.viewmodels;
 
 import android.app.Application;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.ftalaveram.habbbits.R;
 import com.ftalaveram.habbbits.repositories.api.ApiClient;
 import com.ftalaveram.habbbits.repositories.api.ApiService;
 import com.ftalaveram.habbbits.repositories.api.RemoteDataSource;
@@ -46,6 +48,7 @@ public class VerifyAccessViewModel extends AndroidViewModel {
             @Override
             public void onFailure(@NonNull Call<VerifyAccess> call, @NonNull Throwable t) {
                 verifyAccess.postValue(new VerifyAccess(false));
+                Toast.makeText(getApplication().getApplicationContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
             }
         });
     }

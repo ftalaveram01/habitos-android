@@ -68,4 +68,10 @@ public class RecommendedFragment extends Fragment {
             binding.textoVacioRecommendedHabits.setVisibility(VISIBLE);
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        recommendedHabitsViewModel.rechargeHabits();
+    }
 }

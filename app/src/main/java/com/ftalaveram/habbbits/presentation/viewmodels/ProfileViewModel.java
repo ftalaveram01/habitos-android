@@ -1,11 +1,13 @@
 package com.ftalaveram.habbbits.presentation.viewmodels;
 
 import android.app.Application;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.ftalaveram.habbbits.R;
 import com.ftalaveram.habbbits.repositories.api.ApiClient;
 import com.ftalaveram.habbbits.repositories.api.ApiService;
 import com.ftalaveram.habbbits.repositories.api.RemoteDataSource;
@@ -34,7 +36,6 @@ public class ProfileViewModel extends AndroidViewModel {
     public ProfileViewModel(@NonNull Application application){
         super(application);
         sessionManager = new SessionManager(application.getApplicationContext());
-        loadProfileData();
     }
 
     public void logOut(){
@@ -56,6 +57,7 @@ public class ProfileViewModel extends AndroidViewModel {
             @Override
             public void onFailure(@NonNull Call<ProfileResponse> call, @NonNull Throwable t) {
                 profileLiveData.postValue(new ProfileResponse("", "", 0));
+                Toast.makeText(getApplication().getApplicationContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -74,6 +76,7 @@ public class ProfileViewModel extends AndroidViewModel {
             @Override
             public void onFailure(@NonNull Call<UpdateResponse> call, @NonNull Throwable t) {
                 updateLiveData.postValue(new UpdateResponse(false));
+                Toast.makeText(getApplication().getApplicationContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -92,6 +95,7 @@ public class ProfileViewModel extends AndroidViewModel {
             @Override
             public void onFailure(@NonNull Call<UpdateResponse> call, @NonNull Throwable t) {
                 updatePasswordLiveData.postValue(new UpdateResponse(false));
+                Toast.makeText(getApplication().getApplicationContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
             }
         });
     }

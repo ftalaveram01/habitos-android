@@ -1,12 +1,14 @@
 package com.ftalaveram.habbbits.presentation.viewmodels;
 
 import android.app.Application;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.ftalaveram.habbbits.R;
 import com.ftalaveram.habbbits.repositories.api.ApiClient;
 import com.ftalaveram.habbbits.repositories.api.ApiService;
 import com.ftalaveram.habbbits.repositories.api.RemoteDataSource;
@@ -32,7 +34,6 @@ public class RecommendedHabitsViewModel extends AndroidViewModel {
 
     public RecommendedHabitsViewModel(@NonNull Application application){
         super(application);
-        loadHabits();
     }
 
     public LiveData<List<Habit>> getHabits() {
@@ -54,7 +55,12 @@ public class RecommendedHabitsViewModel extends AndroidViewModel {
             @Override
             public void onFailure(@NonNull Call<List<Habit>> call, @NonNull Throwable t) {
                 habitsLiveData.postValue(new ArrayList<>());
+                Toast.makeText(getApplication().getApplicationContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void rechargeHabits(){
+        loadHabits();
     }
 }

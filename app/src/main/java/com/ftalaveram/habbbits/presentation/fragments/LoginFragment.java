@@ -13,7 +13,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.ftalaveram.habbbits.R;
 import com.ftalaveram.habbbits.databinding.FragmentLoginBinding;
 import com.ftalaveram.habbbits.presentation.activities.HomeActivity;
 import com.ftalaveram.habbbits.presentation.viewmodels.LoginViewModel;
@@ -57,8 +59,6 @@ public class LoginFragment extends Fragment {
                 if (loginData.isSuccess()){
                     startActivity(new Intent(requireActivity(), HomeActivity.class));
                     requireActivity().finish();
-                }else{
-                    Log.d("ERROR DE CREDENCIALES", "El usuario o contraseña no son correctos");
                 }
             }
         });

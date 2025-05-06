@@ -1,11 +1,13 @@
 package com.ftalaveram.habbbits.presentation.viewmodels;
 
 import android.app.Application;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.ftalaveram.habbbits.R;
 import com.ftalaveram.habbbits.repositories.api.ApiClient;
 import com.ftalaveram.habbbits.repositories.api.ApiService;
 import com.ftalaveram.habbbits.repositories.api.RemoteDataSource;
@@ -48,7 +50,7 @@ public class CreateHabitsViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(@NonNull Call<CreateResponse> call, @NonNull Throwable t) {
-
+                Toast.makeText(getApplication().getApplicationContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -66,7 +68,7 @@ public class CreateHabitsViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(@NonNull Call<UpdateResponse> call, @NonNull Throwable t) {
-
+                Toast.makeText(getApplication().getApplicationContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
             }
         });
     }

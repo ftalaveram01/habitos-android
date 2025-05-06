@@ -1,11 +1,13 @@
 package com.ftalaveram.habbbits.presentation.viewmodels;
 
 import android.app.Application;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.ftalaveram.habbbits.R;
 import com.ftalaveram.habbbits.repositories.api.ApiClient;
 import com.ftalaveram.habbbits.repositories.api.ApiService;
 import com.ftalaveram.habbbits.repositories.api.RemoteDataSource;
@@ -42,6 +44,7 @@ public class LoginViewModel extends AndroidViewModel {
                     loginData.postValue(new LoginData(response.body().isSuccess(), null, response.body().getToken()));
                 }else{
                     loginData.postValue(new LoginData(false, null, null));
+                    Toast.makeText(getApplication().getApplicationContext(), R.string.login_incorrect, Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -49,6 +52,7 @@ public class LoginViewModel extends AndroidViewModel {
             @Override
             public void onFailure(@NonNull Call<LoginData> call, @NonNull Throwable t) {
                 loginData.postValue(new LoginData(false, null, null));
+                Toast.makeText(getApplication().getApplicationContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
             }
         });
     }

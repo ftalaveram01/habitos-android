@@ -16,6 +16,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
@@ -97,7 +98,7 @@ public class MyHabbbitsRecycledViewAdapter extends RecyclerView.Adapter<MyHabbbi
 
                     @Override
                     public void onFailure(@NonNull Call<DoneResponse> call, @NonNull Throwable t) {
-
+                        Toast.makeText(v.getContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
                     }
                 });
             }

@@ -65,4 +65,6 @@
     <string name="points_with_two_points">Points:</string>
     <string name="clock">Clock</string>
     <string name="use">USE</string>
+    <string name="login_incorrect">Login incorrect</string>
+    <string name="no_internet">NO INTERNET AVAILABLE</string>
 </resources>
