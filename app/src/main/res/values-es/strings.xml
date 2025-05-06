@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Habbbits</string>
-    <string name="hello_blank_fragment">Hola fragmento en blanco</string>
     <string name="my_habbbits">Mis Habbbits</string>
     <string name="recommended">Recomendados</string>
     <string name="achievements">Logros</string>
@@ -36,7 +35,7 @@
     <string name="verifying_user">VERIFICANDO USUARIO...</string>
     <string name="accept">Aceptar</string>
     <string name="done">HECHO</string>
-    <string name="no_achivements_yet">AÚN SIN LOGROS</string>
+    <string name="no_achivements_yet">AÚN NO HAY LOGROS</string>
     <string name="habbbit">HABBBIT</string>
     <string name="name">Nombre</string>
     <string name="description">Descripción</string>
@@ -51,11 +50,11 @@
     <string name="password">Contraseña</string>
     <string name="oculted_password">********</string>
     <string name="login_not_capital_letters">Iniciar sesión</string>
-    <string name="no_habbbits_yet">AÚN SIN HABBBITS</string>
+    <string name="no_habbbits_yet">AÚN NO HAY HABBBITS</string>
     <string name="number_of_habits">Número de Hábitos</string>
     <string name="update">ACTUALIZAR</string>
     <string name="log_out_capitals">CERRAR SESIÓN</string>
-    <string name="no_recommended_habbbits_yet">AÚN SIN HABBBITS RECOMENDADOS</string>
+    <string name="no_recommended_habbbits_yet">AÚN NO HAY HABBBITS RECOMENDADOS</string>
     <string name="example">Ejemplo</string>
     <string name="confirm_password">Confirmar Contraseña</string>
     <string name="register_not_capital_letters">Registrarse</string>
@@ -66,4 +65,6 @@
     <string name="points_with_two_points">Puntos:</string>
     <string name="clock">Reloj</string>
     <string name="use">USAR</string>
+    <string name="login_incorrect">Login incorrecto</string>
+    <string name="no_internet">INTERNET NO DISPONIBLE</string>
 </resources>
