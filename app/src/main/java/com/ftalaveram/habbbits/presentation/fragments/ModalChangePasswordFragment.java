@@ -56,7 +56,7 @@ public class ModalChangePasswordFragment extends DialogFragment {
         view.findViewById(R.id.btn_close_modal).setOnClickListener(v -> dismiss());
 
         view.findViewById(R.id.btn_confirm_update).setOnClickListener(v -> {
-            if (validPassword() && validNewPassword() && validConfirmPassword() && validPasswordMatch()){
+            if (validPassword() && validNewPassword() && validConfirmPassword() && validSequencePassword() && validPasswordMatch()){
                 Snackbar.make(requireView(), getString(R.string.tryingToChangePassword), 600).show();
                 profileViewModel.updatePassword(newPasswordEditText.getText().toString(), passwordEditText.getText().toString());
 
@@ -122,6 +122,37 @@ public class ModalChangePasswordFragment extends DialogFragment {
         }
         newPasswordEditText.setError(getString(R.string.required));
         return false;
+    }
+
+    private boolean validSequencePassword() {
+        String password = newPasswordEditText.getText().toString();
+
+        if (password.isEmpty()) {
+            newPasswordEditText.setError(getString(R.string.required));
+            return false;
+        }
+
+        if (password.length() < 8) {
+            newPasswordEditText.setError(getString(R.string.password_length_error));
+            return false;
+        }
+
+        if (!password.matches(".*[a-z].*")) {
+            newPasswordEditText.setError(getString(R.string.password_lowercase_error));
+            return false;
+        }
+
+        if (!password.matches(".*[A-Z].*")) {
+            newPasswordEditText.setError(getString(R.string.password_uppercase_error));
+            return false;
+        }
+
+        if (!password.matches(".*\\d.*")) {
+            newPasswordEditText.setError(getString(R.string.password_number_error));
+            return false;
+        }
+
+        return true;
     }
 
     private boolean validConfirmPassword(){

@@ -48,7 +48,7 @@ public class RegisterFragment extends Fragment {
         binding.btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validName() && validEmail() && validPassword() && validConfirmPassword() && validPasswordMatch()){
+                if (validName() && validEmail() && validPassword() && validConfirmPassword() && validSequencePassword() && validPasswordMatch()){
                     if (inputsValidators()){
                         registerViewModel.register(binding.nameInput.getText().toString(), binding.emailInput.getText().toString(), binding.passwordInput.getText().toString());
                     }
@@ -103,6 +103,37 @@ public class RegisterFragment extends Fragment {
         }
         binding.passwordInput.setError(getString(R.string.required));
         return false;
+    }
+
+    private boolean validSequencePassword() {
+        String password = binding.passwordInput.getText().toString();
+
+        if (password.isEmpty()) {
+            binding.passwordInput.setError(getString(R.string.required));
+            return false;
+        }
+
+        if (password.length() < 8) {
+            binding.passwordInput.setError(getString(R.string.password_length_error));
+            return false;
+        }
+
+        if (!password.matches(".*[a-z].*")) {
+            binding.passwordInput.setError(getString(R.string.password_lowercase_error));
+            return false;
+        }
+
+        if (!password.matches(".*[A-Z].*")) {
+            binding.passwordInput.setError(getString(R.string.password_uppercase_error));
+            return false;
+        }
+
+        if (!password.matches(".*\\d.*")) {
+            binding.passwordInput.setError(getString(R.string.password_number_error));
+            return false;
+        }
+
+        return true;
     }
 
     private boolean validConfirmPassword(){

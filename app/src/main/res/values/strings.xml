@@ -66,4 +66,8 @@
     <string name="use">USE</string>
     <string name="login_incorrect">Login incorrect</string>
     <string name="no_internet">NO INTERNET AVAILABLE</string>
+    <string name="password_length_error">It must be eight or more characters</string>
+    <string name="password_lowercase_error">It must contain a non capital letter</string>
+    <string name="password_uppercase_error">It must contain a capital letter</string>
+    <string name="password_number_error">It must contain a number</string>
 </resources>
