@@ -30,109 +30,31 @@
         android:paddingHorizontal="20dp"
         android:background="@drawable/profile_form_container"
         >
-        <TextView
-            android:id="@+id/name_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="@string/name"
-            android:textColor="@color/black"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/nameInputLayout"
-            style="@style/MyOutlinedTextInputLayout"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            app:boxBackgroundMode="outline"
-            app:boxBackgroundColor="@color/softGreen"
-            app:boxStrokeColor="@color/black"
-            app:boxStrokeWidth="1dp"
-            app:boxStrokeWidthFocused="1.2dp"
-            app:boxCornerRadiusBottomEnd="10dp"
-            app:boxCornerRadiusBottomStart="10dp"
-            app:boxCornerRadiusTopEnd="10dp"
-            app:boxCornerRadiusTopStart="10dp"
-            app:hintTextColor="@color/black"
-            app:cursorColor="@color/black"
-            >
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/nameInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColor="@android:color/black"
-                android:textColorHint="@color/black"
-                android:textSize="14sp"
-                android:padding="16dp"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/description_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="@string/description"
-            android:textColor="@color/black"/>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/descriptionInputLayout"
-            style="@style/MyOutlinedTextInputLayout"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:minHeight="120dp"
-            app:boxBackgroundMode="outline"
-            app:boxBackgroundColor="@color/softGreen"
-            app:boxStrokeColor="@color/black"
-            app:boxStrokeWidth="1dp"
-            app:boxStrokeWidthFocused="1.2dp"
-            app:boxCornerRadiusBottomEnd="10dp"
-            app:boxCornerRadiusBottomStart="10dp"
-            app:boxCornerRadiusTopEnd="10dp"
-            app:boxCornerRadiusTopStart="10dp"
-            app:hintTextColor="@color/black"
-            app:cursorColor="@color/black"
-            >
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/descriptionInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="120dp"
-                android:maxHeight="150dp"
-                android:inputType="textMultiLine"
-                android:textColor="@android:color/black"
-                android:textColorHint="@color/black"
-                android:textSize="14sp"
-                android:padding="16dp"
-                android:gravity="start"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/frequency_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="@string/frequency"
-            android:textColor="@color/black"/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
         <LinearLayout
-            android:id="@+id/frequency_inputs"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/name_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="@string/name"
+                android:textColor="@color/black"/>
+
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/numberFrequencyInputLayout"
+                android:id="@+id/nameInputLayout"
                 style="@style/MyOutlinedTextInputLayout"
-                android:layout_width="100dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 app:boxBackgroundMode="outline"
                 app:boxBackgroundColor="@color/softGreen"
@@ -148,109 +70,198 @@
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/numberFrequencyInput"
+                    android:id="@+id/nameInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
+                    android:inputType="text"
                     android:textColor="@android:color/black"
                     android:textColorHint="@color/black"
                     android:textSize="14sp"
-                    android:padding="16dp"/>
+                    android:padding="16dp"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
-            <Spinner
-                android:id="@+id/frequency_spinner"
-                android:layout_width="200dp"
+
+            <TextView
+                android:id="@+id/description_label"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minHeight="48dp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textSize="14sp"
-                android:textAlignment="center"
-                android:paddingHorizontal="0dp"
-                android:paddingVertical="3dp"
-                android:layout_marginTop="2dp"
-                style="@style/NewHabbbitSpinnerTheme"
+                android:layout_marginTop="10dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="@string/description"
+                android:textColor="@color/black"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/descriptionInputLayout"
+                style="@style/MyOutlinedTextInputLayout"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:minHeight="120dp"
+                app:boxBackgroundMode="outline"
+                app:boxBackgroundColor="@color/softGreen"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidth="1dp"
+                app:boxStrokeWidthFocused="1.2dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:hintTextColor="@color/black"
+                app:cursorColor="@color/black"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/descriptionInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="120dp"
+                    android:maxHeight="150dp"
+                    android:inputType="textMultiLine"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="14sp"
+                    android:padding="16dp"
+                    android:gravity="start"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/frequency_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="@string/frequency"
+                android:textColor="@color/black"/>
+
+            <LinearLayout
+                android:id="@+id/frequency_inputs"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/numberFrequencyInputLayout"
+                    style="@style/MyOutlinedTextInputLayout"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    app:boxBackgroundMode="outline"
+                    app:boxBackgroundColor="@color/softGreen"
+                    app:boxStrokeColor="@color/black"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="1.2dp"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:boxCornerRadiusBottomStart="10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:boxCornerRadiusTopStart="10dp"
+                    app:hintTextColor="@color/black"
+                    app:cursorColor="@color/black"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/numberFrequencyInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:textColor="@android:color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="14sp"
+                        android:padding="16dp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+                <Spinner
+                    android:id="@+id/frequency_spinner"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:textAlignment="center"
+                    android:paddingHorizontal="0dp"
+                    android:paddingVertical="3dp"
+                    android:layout_marginTop="2dp"
+                    style="@style/NewHabbbitSpinnerTheme"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/date_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="@string/initial_date"
+                android:textColor="@color/black"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dateInputLayout"
+                style="@style/MyOutlinedTextInputLayout"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundMode="outline"
+                app:boxBackgroundColor="@color/softGreen"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidth="1dp"
+                app:boxStrokeWidthFocused="1.2dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:hintTextColor="@color/black"
+                app:cursorColor="@color/black"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dateInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="14sp"
+                    android:padding="20dp"
+                    android:gravity="start"
+                    tools:ignore="KeyboardInaccessibleWidget" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/public_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="@string/public_checkbox"
+                android:textColor="@color/black"/>
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/public_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:trackDecorationTint="@color/black"
+                app:thumbTint="@color/white"
+                app:trackTint="@color/switch_bg"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:paddingHorizontal="60dp"
+                android:paddingVertical="16dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/purple"
+                android:textColor="@color/white"
                 />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/date_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="@string/initial_date"
-            android:textColor="@color/black"/>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/dateInputLayout"
-            style="@style/MyOutlinedTextInputLayout"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            app:boxBackgroundMode="outline"
-            app:boxBackgroundColor="@color/softGreen"
-            app:boxStrokeColor="@color/black"
-            app:boxStrokeWidth="1dp"
-            app:boxStrokeWidthFocused="1.2dp"
-            app:boxCornerRadiusBottomEnd="10dp"
-            app:boxCornerRadiusBottomStart="10dp"
-            app:boxCornerRadiusTopEnd="10dp"
-            app:boxCornerRadiusTopStart="10dp"
-            app:hintTextColor="@color/black"
-            app:cursorColor="@color/black"
-            >
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/dateInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="none"
-                android:focusable="false"
-                android:clickable="true"
-                android:textColor="@android:color/black"
-                android:textColorHint="@color/black"
-                android:textSize="14sp"
-                android:padding="20dp"
-                android:gravity="start"
-                tools:ignore="KeyboardInaccessibleWidget" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/public_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="@string/public_checkbox"
-            android:textColor="@color/black"/>
-
-        <com.google.android.material.materialswitch.MaterialSwitch
-            android:id="@+id/public_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:trackDecorationTint="@color/black"
-            app:thumbTint="@color/white"
-            app:trackTint="@color/switch_bg"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:paddingHorizontal="60dp"
-            android:paddingVertical="16dp"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="@color/purple"
-            android:textColor="@color/white"
-            />
+        </ScrollView>
 
     </LinearLayout>
-
-
-
 
 </LinearLayout>
